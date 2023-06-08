@@ -1,6 +1,7 @@
 package com.pms.supplier.model;
 
 import java.util.Date;
+import java.util.Objects;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -49,5 +50,23 @@ public Drugs() {
 	super();
 	// TODO Auto-generated constructor stub
 }
+@Override
+public int hashCode() {
+	return Objects.hash(batchId, drugName, exp_date, price);
+}
+@Override
+public boolean equals(Object obj) {
+	if (this == obj)
+		return true;
+	if (obj == null)
+		return false;
+	if (getClass() != obj.getClass())
+		return false;
+	Drugs other = (Drugs) obj;
+	return Objects.equals(batchId, other.batchId) && Objects.equals(drugName, other.drugName)
+			&& Objects.equals(exp_date, other.exp_date)
+			&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price);
+}
+
 
 }
