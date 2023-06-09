@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.pms.supplier.exception.ResourceNotFoundException;
 import com.pms.supplier.model.Drugs;
 import com.pms.supplier.model.Supplier;
 import com.pms.supplier.repository.DrugRepository;
@@ -26,8 +27,11 @@ public class SupplyService {
 		return supplierRepository.findAll();
 	}
 	
-	public Supplier insertSuppliers(Supplier supplier) {
+	public Supplier insertSuppliers(Supplier supplier) throws ResourceNotFoundException {
 		supplierRepository.insert(supplier);
+		if(supplier.equals(null)) {
+			throw new ResourceNotFoundException("please specify all info");
+		}
 		return supplier;
 	}
 
@@ -41,12 +45,18 @@ public class SupplyService {
 		return drugRepository.insert(drug);
 	}
 
-	public Supplier addStock(int id,String drugName,int qty) {
+	public Supplier addStock(int id,String drugName,int qty) throws ResourceNotFoundException {
 		// TODO Auto-generated method stub
 		Supplier supplier=supplierRepository.findById(id).orElse(null);
 		//if supplier is null then invalid Id
+		if(supplier.equals(null)) {
+			throw new ResourceNotFoundException("Invalid Id");
+		}
 		Drugs drug=drugRepository.findById(drugName).orElse(null);
 		//if drug is null then invalid drug name or drug is not available
+		if(drug.equals(null)) {
+			throw new ResourceNotFoundException("Invalid drug name");
+		}
 		List<HashMap<String,Integer>> stocks=new ArrayList<HashMap<String,Integer>>();
 		stocks=supplier.getStock();
 		HashMap<String,Integer> stock1=new HashMap<String,Integer>();
