@@ -1,0 +1,12 @@
+Supplier:
+/supplier/get
+/supplier/add
+/supplier/load   (rp: id,name,qty)
+
+Drugs:
+/drugs/get
+/drugs/add
+/drugs/viewDrugByName/{name}
+
+Swagger:
+supplier: http://localhost:8000/swagger-ui.html
