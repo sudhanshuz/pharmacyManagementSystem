@@ -48,7 +48,6 @@ public Drugs(String drugName, double price, Date exp_date, String batchId) {
 }
 public Drugs() {
 	super();
-	// TODO Auto-generated constructor stub
 }
 @Override
 public int hashCode() {

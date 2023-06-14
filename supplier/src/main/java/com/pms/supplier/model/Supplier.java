@@ -13,7 +13,7 @@ private int supplierId;
 private String supplierName;
 private String supplierEmail;
 private long supplierPhoneNo;
-private List<HashMap<String,Integer>>stock=new ArrayList<HashMap<String,Integer>>();
+private List<HashMap<String,Integer>>stock=new ArrayList<>();
 //private Order orders;
 public int getSupplierId() {
 	return supplierId;
@@ -56,7 +56,6 @@ public Supplier(int supplierId, String supplierName, String supplierEmail, long 
 }
 public Supplier() {
 	super();
-	// TODO Auto-generated constructor stub
 }
 
 

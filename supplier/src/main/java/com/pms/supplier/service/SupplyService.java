@@ -46,7 +46,6 @@ public class SupplyService {
 	}
 
 	public Supplier addStock(int id,String drugName,int qty) throws ResourceNotFoundException {
-		// TODO Auto-generated method stub
 		Supplier supplier=supplierRepository.findById(id).orElse(null);
 		//if supplier is null then invalid Id
 		if(supplier.equals(null)) {
@@ -57,9 +56,9 @@ public class SupplyService {
 		if(drug.equals(null)) {
 			throw new ResourceNotFoundException("Invalid drug name");
 		}
-		List<HashMap<String,Integer>> stocks=new ArrayList<HashMap<String,Integer>>();
+		List<HashMap<String,Integer>> stocks=new ArrayList<>();
 		stocks=supplier.getStock();
-		HashMap<String,Integer> stock1=new HashMap<String,Integer>();
+		HashMap<String,Integer> stock1=new HashMap<>();
 		stock1.put(drug.getDrugName(),qty);
 		stocks.add(stock1);
 		supplier.setStock(stocks);
@@ -67,7 +66,6 @@ public class SupplyService {
 	}
 
 	public Drugs viewDrugByName(String name) {
-		// TODO Auto-generated method stub
 		return drugRepository.findById(name).orElse(null);
 	}
 }
