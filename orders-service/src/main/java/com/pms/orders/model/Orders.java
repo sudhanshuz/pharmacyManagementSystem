@@ -1,5 +1,8 @@
 package com.pms.orders.model;
 
+import java.util.Date;
+import java.util.HashMap;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
@@ -18,6 +21,37 @@ public class Orders {
 	
 	private String docName;
 	private long docContact;
+	private String docEmail;
+	private double total;
+	private Date pickupDate;
+	private HashMap<String,Integer> drugInfo;
+	
+	
+	
+	public HashMap<String, Integer> getDrugInfo() {
+		return drugInfo;
+	}
+	public void setDrugInfo(HashMap<String, Integer> drugInfo) {
+		this.drugInfo = drugInfo;
+	}
+	public String getDocEmail() {
+		return docEmail;
+	}
+	public void setDocEmail(String docEmail) {
+		this.docEmail = docEmail;
+	}
+	public double getTotal() {
+		return total;
+	}
+	public void setTotal(double total) {
+		this.total = total;
+	}
+	public Date getPickupDate() {
+		return pickupDate;
+	}
+	public void setPickupDate(Date pickupDate) {
+		this.pickupDate = pickupDate;
+	}
 	public Long getOrderId() {
 		return orderId;
 	}
@@ -41,6 +75,14 @@ public class Orders {
 		this.orderId = orderId;
 		this.docName = docName;
 		this.docContact = docContact;
+	}
+	
+	public Orders(String docName, long docContact, String docEmail, HashMap<String, Integer> drugInfo) {
+		super();
+		this.docName = docName;
+		this.docContact = docContact;
+		this.docEmail = docEmail;
+		this.drugInfo = drugInfo;
 	}
 	public Orders() {
 		super();

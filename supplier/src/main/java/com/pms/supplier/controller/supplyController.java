@@ -1,6 +1,6 @@
 package com.pms.supplier.controller;
-
-import java.util.HashMap;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.pms.supplier.exception.ResourceNotFoundException;
-import com.pms.supplier.model.Drugs;
 import com.pms.supplier.model.Supplier;
 import com.pms.supplier.service.SupplyService;
 
@@ -44,5 +43,12 @@ public class supplyController {
 	@PutMapping("/load")
 	public Supplier loadStock(@RequestParam int id,@RequestParam String drugName,@RequestParam int qty) throws ResourceNotFoundException{
 		return serviceObj.addStock(id,drugName,qty);
+	}
+	@GetMapping("/setPickupDate/{orderId}")
+	public Date setPickupDate(@PathVariable String orderId) {
+		//verify order if everything is ok set pickup date
+		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
+	    Date date = new Date(new Date().getTime() + (86400000*2)); 
+		return date;
 	}
 }

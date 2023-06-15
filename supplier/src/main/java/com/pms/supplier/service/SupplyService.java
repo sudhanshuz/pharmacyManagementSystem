@@ -68,4 +68,13 @@ public class SupplyService {
 	public Drugs viewDrugByName(String name) {
 		return drugRepository.findById(name).orElse(null);
 	}
+
+	public double getDrugPrice(String drugName) throws ResourceNotFoundException {
+		Drugs drug=drugRepository.findById(drugName).orElse(null);
+		if(drug.equals(null)) {
+			throw new ResourceNotFoundException(drugName+ "not available currently");
+		}
+		double price=drug.getPrice();
+		return price;
+	}
 }

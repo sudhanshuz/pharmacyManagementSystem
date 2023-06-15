@@ -7,6 +7,14 @@ Drugs:
 /drugs/get
 /drugs/add
 /drugs/viewDrugByName/{name}
+/drugs/getDrugPrice/{drugName}
+
+Orders:
+/orders/addOrder
+/orders/getAllorders
+/orders/getOrdersById
+/orders/getOrdersByDocName/{docName}
+/orders/setTotalPrice/{docName}/{qty}
 
 Swagger:
 supplier: http://localhost:8000/swagger-ui.html

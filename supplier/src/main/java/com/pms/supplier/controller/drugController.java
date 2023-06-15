@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pms.supplier.exception.ResourceNotFoundException;
 import com.pms.supplier.model.Drugs;
 import com.pms.supplier.service.SupplyService;
 
@@ -31,5 +32,10 @@ public class drugController {
 	@GetMapping("/viewDrugByName/{name}")
 	public Drugs viewDrugByName(@PathVariable String name) {
 		return serviceObj.viewDrugByName(name);
+	}
+	
+	@GetMapping("/getDrugPrice/{drugName}")
+	public double getDrugPrice(@PathVariable String drugName) throws ResourceNotFoundException {
+		return serviceObj.getDrugPrice(drugName);
 	}
 }
