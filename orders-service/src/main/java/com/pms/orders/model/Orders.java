@@ -2,14 +2,14 @@ package com.pms.orders.model;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Map;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
-import com.pms.orders.service.SequenceGeneratorService;
+import jakarta.validation.constraints.NotEmpty;
 
 @Document(collection="Orders")
 @Component
@@ -17,13 +17,15 @@ public class Orders {
 	@Transient
 	public static final String SEQUENCE_NAME="orders_sequence";
 	@Id
-	private Long orderId;
-	
+	private Long orderId;//auto added
+	@NotEmpty(message="cannot be blank")
 	private String docName;
+	@NotEmpty(message="cannot be blank")
 	private long docContact;
+	@NotEmpty(message="cannot be blank")
 	private String docEmail;
-	private double total;
-	private Date pickupDate;
+	private double total; //auto added
+	private Date pickupDate;//auto added
 	private HashMap<String,Integer> drugInfo;
 	
 	
@@ -86,7 +88,6 @@ public class Orders {
 	}
 	public Orders() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	

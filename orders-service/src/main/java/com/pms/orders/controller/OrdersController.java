@@ -3,6 +3,7 @@ package com.pms.orders.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,10 +12,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.pms.orders.exception.ResourceNotFoundException;
 import com.pms.orders.model.Orders;
-import com.pms.orders.repository.OrdersRepository;
 import com.pms.orders.service.OrdersService;
 import com.pms.orders.service.SequenceGeneratorService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/orders")
@@ -24,13 +27,13 @@ public class OrdersController {
 	@Autowired
 	private SequenceGeneratorService service;
 	
-	@PostMapping("/addOrder")
-	public Orders save(@RequestBody Orders order) {
+	@PostMapping("/add")
+	public Orders save(@RequestBody @Valid Orders order) {
 		order.setOrderId(service.generateSequence(Orders.SEQUENCE_NAME));
 		return ordersService.addOrder(order);
 	}
 	
-	@GetMapping("/getAllorders")
+	@GetMapping("/getAll")
 	public List<Orders> getOrders(){
 		return ordersService.getOrders();
 	}
@@ -45,13 +48,23 @@ public class OrdersController {
 		return ordersService.getOrdersByDocName(docName);
 	}
 	@PutMapping("/setTotalPrice/{docName}/{qty}")
-	public Orders setTotalPrice(@PathVariable String drugName,@PathVariable String qty,long orderId) {
+	public Orders setTotalPrice(@PathVariable String drugName,@PathVariable String qty,long orderId) throws NumberFormatException, ResourceNotFoundException {
 		//connect supplier ms to get total price
 		return ordersService.setTotalPrice(drugName,Integer.parseInt(qty),orderId);
 	}
 	
 	@PutMapping("/setPickupDate/{orderId}")
-	public Orders setPickupDate(long orderId) {
+	public Orders setPickupDate(long orderId) throws ResourceNotFoundException {
 		return ordersService.setPickupDate(orderId);
+	}
+	
+	@PostMapping("/edit")
+	public Orders editOrder(@RequestBody @Valid Orders order) {
+		return ordersService.editOrder(order);
+	}
+	
+	@DeleteMapping("/delete/{orderId}")
+	public Orders deleteOrder(@PathVariable String orderId) {
+		return ordersService.deleteOrder(Long.parseLong(orderId));
 	}
 }

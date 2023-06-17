@@ -1,6 +1,6 @@
 package com.pms.supplier.service;
 
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -27,36 +27,31 @@ public class SupplyService {
 		return supplierRepository.findAll();
 	}
 	
-	public Supplier insertSuppliers(Supplier supplier) throws ResourceNotFoundException {
+	public Supplier insertSuppliers(Supplier supplier){
 		supplierRepository.insert(supplier);
-		if(supplier.equals(null)) {
-			throw new ResourceNotFoundException("please specify all info");
-		}
 		return supplier;
 	}
 
 	public  List<Drugs> getDrugs() {
-		// TODO Auto-generated method stub
 		return drugRepository.findAll();
 	}
 
 	public Drugs insertDrug(Drugs drug) {
-		// TODO Auto-generated method stub
 		return drugRepository.insert(drug);
 	}
 
 	public Supplier addStock(int id,String drugName,int qty) throws ResourceNotFoundException {
 		Supplier supplier=supplierRepository.findById(id).orElse(null);
 		//if supplier is null then invalid Id
-		if(supplier.equals(null)) {
+		if(supplier==(null)) {
 			throw new ResourceNotFoundException("Invalid Id");
 		}
 		Drugs drug=drugRepository.findById(drugName).orElse(null);
 		//if drug is null then invalid drug name or drug is not available
-		if(drug.equals(null)) {
+		if(drug==(null)) {
 			throw new ResourceNotFoundException("Invalid drug name");
 		}
-		List<HashMap<String,Integer>> stocks=new ArrayList<>();
+		List<HashMap<String,Integer>> stocks;
 		stocks=supplier.getStock();
 		HashMap<String,Integer> stock1=new HashMap<>();
 		stock1.put(drug.getDrugName(),qty);
@@ -71,10 +66,32 @@ public class SupplyService {
 
 	public double getDrugPrice(String drugName) throws ResourceNotFoundException {
 		Drugs drug=drugRepository.findById(drugName).orElse(null);
-		if(drug.equals(null)) {
+		if(drug==(null)) {
 			throw new ResourceNotFoundException(drugName+ "not available currently");
 		}
-		double price=drug.getPrice();
-		return price;
+		return drug.getPrice();
+	}
+
+	public Drugs deleteDrugs(String drugName) throws ResourceNotFoundException {
+		Drugs drug=drugRepository.findById(drugName).orElse(null);
+		if(drug==null) {
+			throw new ResourceNotFoundException(drugName+ "not available currently");
+		}
+		drugRepository.delete(drug);
+		return drug;
+	}
+
+	public Drugs editDrugs(Drugs drug1) {
+		return drugRepository.save(drug1);
+	}
+
+	public Supplier deleteSupplier(int id) {
+		
+		supplierRepository.deleteById(id);
+		return supplierRepository.findById(id).orElse(null);
+	}
+
+	public Supplier editSupplier(Supplier supplier) {
+		return supplierRepository.save(supplier);
 	}
 }

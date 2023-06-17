@@ -2,19 +2,28 @@ Supplier:
 /supplier/get
 /supplier/add
 /supplier/load   (rp: id,name,qty)
+/supplier/setPickupDate/{orderId}
+/supplier/delete/{supplierId}
+/supplier/edit
 
 Drugs:
 /drugs/get
 /drugs/add
 /drugs/viewDrugByName/{name}
 /drugs/getDrugPrice/{drugName}
+drugs/deleteDrugByName/{drugName}
+drugs/edit
 
 Orders:
-/orders/addOrder
-/orders/getAllorders
+/orders/add
+/orders/getAll
 /orders/getOrdersById
 /orders/getOrdersByDocName/{docName}
 /orders/setTotalPrice/{docName}/{qty}
+/orders/setPickupDate/{orderId}
+orders/edit
+orders/delete/{orderId}
 
 Swagger:
-supplier: http://localhost:8000/swagger-ui.html
+supplier: http://localhost:8000/swagger-ui/index.html
+order-service:http://localhost:8001/swagger-ui.html

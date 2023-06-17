@@ -1,11 +1,11 @@
 package com.pms.supplier.controller;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,7 +36,7 @@ public class supplyController {
 	}
 	
 	@PostMapping("/add")
-	public Supplier addSuppliers(@RequestBody Supplier supplier) throws ResourceNotFoundException {
+	public Supplier addSuppliers(@RequestBody Supplier supplier) {
 		return serviceObj.insertSuppliers(supplier);
 	}
 	
@@ -47,8 +47,16 @@ public class supplyController {
 	@GetMapping("/setPickupDate/{orderId}")
 	public Date setPickupDate(@PathVariable String orderId) {
 		//verify order if everything is ok set pickup date
-		SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");  
-	    Date date = new Date(new Date().getTime() + (86400000*2)); 
-		return date;
+	    return new Date(new Date().getTime() + (86400000*2));
+	}
+	@DeleteMapping("/delete/{supplierId}")
+	public Supplier deleteSupplier(@PathVariable String supplierId ) {
+		int id=Integer.parseInt(supplierId);
+		return serviceObj.deleteSupplier(id );
+	}
+	
+	@PutMapping("/edit")
+	public Supplier editSupplier(@RequestBody Supplier supplier) {
+		return serviceObj.editSupplier(supplier);
 	}
 }

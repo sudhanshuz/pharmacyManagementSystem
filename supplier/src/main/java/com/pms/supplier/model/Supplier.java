@@ -14,7 +14,6 @@ private String supplierName;
 private String supplierEmail;
 private long supplierPhoneNo;
 private List<HashMap<String,Integer>>stock=new ArrayList<>();
-//private Order orders;
 public int getSupplierId() {
 	return supplierId;
 }
