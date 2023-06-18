@@ -1,8 +1,10 @@
 package com.pms.users.service;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.pms.users.model.User;
@@ -11,8 +13,11 @@ import com.pms.users.repository.UserRepository;
 public class UserService {
 	@Autowired
 	UserRepository userRepository;
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	
 	public User saveUser(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.insert(user);
 	}
 
@@ -35,7 +40,7 @@ public class UserService {
 		return user;
 	}
 
-	public User getByName(String name) {
+	public Optional<User> getByName(String name) {
 		return userRepository.findByName(name);
 	}
 	
