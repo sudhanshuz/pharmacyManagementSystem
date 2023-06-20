@@ -1,5 +1,5 @@
 Supplier:
-/supplier/get
+/supplier/getAll
 /supplier/add
 /supplier/load   (rp: id,name,qty)
 /supplier/setPickupDate/{orderId}
@@ -7,7 +7,7 @@ Supplier:
 /supplier/edit
 
 Drugs:
-/drugs/get
+/drugs/getAll
 /drugs/add
 /drugs/viewDrugByName/{name}
 /drugs/getDrugPrice/{drugName}

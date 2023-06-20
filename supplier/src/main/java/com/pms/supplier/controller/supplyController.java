@@ -30,7 +30,7 @@ public class supplyController {
 	
 	Logger logger=LoggerFactory.getLogger(supplyController.class);
 	
-	@GetMapping("/get")
+	@GetMapping("/getAll")
 	public List<Supplier> getSuppliers() {
 		return serviceObj.viewSuppliers();
 	}

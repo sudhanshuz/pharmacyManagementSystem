@@ -21,7 +21,7 @@ import com.pms.supplier.service.SupplyService;
 public class drugController {
 	@Autowired
 	private SupplyService serviceObj;
-	@GetMapping("/get")
+	@GetMapping("/getAll")
 	public List<Drugs> viewDrugs(){
 		return serviceObj.getDrugs();
 	}
