@@ -27,6 +27,7 @@ public class Orders {
 	private double total; //auto added
 	private Date pickupDate;//auto added
 	private HashMap<String,Integer> drugInfo;
+	//private String supplierName
 	
 	
 	
