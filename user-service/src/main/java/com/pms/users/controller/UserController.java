@@ -43,6 +43,8 @@ public class UserController {
 	private SupplierCopyService supplierCopyService;
 	@Autowired
 	private SupplyRepo supplyRepo;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	Logger logger=LoggerFactory.getLogger(UserController.class);
 	
@@ -168,18 +170,24 @@ public class UserController {
 	
 	
 	@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/viewPickedUpOrders")
 	public String addOrdersToPickup() {
 		
 		return null;
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
-	public String verifyOrders() {
-		return null;
+	//@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/verifyOrders")
+	public List<Orders> verifyOrders() {
+		
+		return supplierCopyService.verifyOrders();
 	}
 	
-	@PreAuthorize("hasRole('DOCTOR')")
-	public String placeOrder() {
-		return null;
+	//@PreAuthorize("hasRole('DOCTOR')")
+	@PostMapping("/placeOrder")
+	public Orders placeOrder(@RequestBody Orders order) {
+		//restTemplate.
+		
+		return supplierCopyService.placeOrder(order);
 	}
 }

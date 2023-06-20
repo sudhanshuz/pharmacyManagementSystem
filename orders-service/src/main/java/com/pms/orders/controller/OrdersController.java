@@ -38,8 +38,8 @@ public class OrdersController {
 		return ordersService.getOrders();
 	}
 	
-	@GetMapping("/getOrdersById")
-	public Orders getOrdersDetailsById(long orderId) {
+	@GetMapping("/getOrdersById/{orderId}")
+	public Orders getOrdersDetailsById(@PathVariable long orderId) {
 		return ordersService.getOrdersDetailsById(orderId);
 	}
 	
@@ -67,4 +67,5 @@ public class OrdersController {
 	public Orders deleteOrder(@PathVariable String orderId) {
 		return ordersService.deleteOrder(Long.parseLong(orderId));
 	}
+	
 }

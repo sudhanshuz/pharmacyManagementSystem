@@ -5,6 +5,9 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -86,6 +89,7 @@ public class SupplierCopyService {
 	public List<Orders> viewAllOrders() {
 		// TODO Auto-generated method stub
 		return ordersRepo.findAll();
+		
 	}
 
 	public List<Drugs> addDrugs() {
@@ -113,6 +117,31 @@ public class SupplierCopyService {
 	public List<Drugs> viewDrugs() {
 		// TODO Auto-generated method stub
 		return drugrepo.findAll();
+	}
+
+	public Orders placeOrder(Orders order) {
+		// TODO Auto-generated method stub
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
+        Orders orderUpdated=restTemplate.postForObject("http://ORDERS-SERVICE/orders/add", requestEntity, Orders.class);
+        //=restTemplate.getForObject("http://ORDERS-SERVICE/orders/getOrdersById"+,Orders.class);
+		return ordersRepo.save(orderUpdated);
+	}
+
+	public List<Orders> verifyOrders() {
+		// TODO Auto-generated method stub
+		List<Orders> ordersList=ordersRepo.findAll();
+		List<Orders> verifiedList=null;
+		for(Orders order:ordersList) {
+			if(!order.isVerified()) {
+				//check if order is valid or not
+				order.setVerified(true);
+				verifiedList.add(order);
+			}
+		}
+		return  verifiedList;
 	}
 
 }

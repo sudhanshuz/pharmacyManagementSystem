@@ -1,4 +1,4 @@
-package com.pms.users.model;
+package com.pms.orders.model;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -10,12 +10,12 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
+@Document(collection="pickedUpOrders")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection="OrdersCopy")
-public class Orders {
+public class PickedUpOrders {
+
 	@Id
 	private Long orderId;//auto added
 	@NotEmpty(message="cannot be blank")
@@ -27,7 +27,4 @@ public class Orders {
 	private double total; //auto added
 	private Date pickupDate;//auto added
 	private HashMap<String,Integer> drugInfo;
-	private boolean verified=false;
-	
-	
 }

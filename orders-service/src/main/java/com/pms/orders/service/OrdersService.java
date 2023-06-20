@@ -1,6 +1,7 @@
 package com.pms.orders.service;
 
 import java.util.ArrayList;
+
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,17 +10,23 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.pms.orders.exception.ResourceNotFoundException;
 import com.pms.orders.model.Orders;
+import com.pms.orders.model.PickedUpOrders;
 import com.pms.orders.repository.OrdersRepository;
+import com.pms.orders.repository.PickedUpOrdersRepo;
+
 
 @Service
 public class OrdersService {
 	@Autowired
 	OrdersRepository orderRepository;
+	@Autowired
+PickedUpOrdersRepo pickedUpOrdersRepo;
 	@Autowired
 	RestTemplate restTemplate;
 	public Orders addOrder(Orders order) {
@@ -82,6 +89,7 @@ public class OrdersService {
 		orderRepository.deleteById(orderId);
 		return orderRepository.findById(orderId).orElse(null);
 	}
+
 	
 	
 	
