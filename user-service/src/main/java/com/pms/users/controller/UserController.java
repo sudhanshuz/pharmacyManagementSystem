@@ -106,7 +106,7 @@ public class UserController {
 		return supplierCopyService.addAllOrders();
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	//@PreAuthorize("hasRole('ADMIN')")
 	@GetMapping("/viewOrders")
 	public List<Orders> viewAllOrders() {
 		
@@ -169,11 +169,11 @@ public class UserController {
 	}
 	
 	
-	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/viewPickedUpOrders")
-	public String addOrdersToPickup() {
+	//@PreAuthorize("hasRole('ADMIN')")
+	@GetMapping("/pickUpOrders")
+	public List<Orders> addOrdersToPickup() {
 		
-		return null;
+		return supplierCopyService.addOrdersToPickup();
 	}
 	
 	//@PreAuthorize("hasRole('ADMIN')")

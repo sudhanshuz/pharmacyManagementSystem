@@ -17,8 +17,11 @@ import org.springframework.web.client.RestTemplate;
 import com.pms.orders.exception.ResourceNotFoundException;
 import com.pms.orders.model.Orders;
 import com.pms.orders.model.PickedUpOrders;
+import com.pms.orders.model.VerifiedOrders;
 import com.pms.orders.repository.OrdersRepository;
 import com.pms.orders.repository.PickedUpOrdersRepo;
+import com.pms.orders.repository.VerifiedOrdersRepo;
+
 
 
 @Service
@@ -27,6 +30,8 @@ public class OrdersService {
 	OrdersRepository orderRepository;
 	@Autowired
 PickedUpOrdersRepo pickedUpOrdersRepo;
+	@Autowired
+	VerifiedOrdersRepo verifiedOrderRepo;
 	@Autowired
 	RestTemplate restTemplate;
 	public Orders addOrder(Orders order) {
@@ -88,6 +93,30 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 	public Orders deleteOrder(long orderId) {
 		orderRepository.deleteById(orderId);
 		return orderRepository.findById(orderId).orElse(null);
+	}
+
+	public List<VerifiedOrders> viewVerifiedOrders() {
+		// TODO Auto-generated method stub
+		String url="http://USERS-SERVICE/user/viewOrders";
+		ResponseEntity<Orders[]> order=restTemplate.getForEntity(url,Orders[].class);
+		Orders[] ordersList=order.getBody();
+		for(Orders orders:ordersList) {
+			VerifiedOrders vObj=new VerifiedOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
+			verifiedOrderRepo.save(vObj);
+		}
+		return verifiedOrderRepo.findAll();
+	}
+
+	public List<PickedUpOrders> viewPickedUpOrders() {
+		// TODO Auto-generated method stub
+		String url="http://USERS-SERVICE/user/pickUpOrders";
+		ResponseEntity<Orders[]> order=restTemplate.getForEntity(url,Orders[].class);
+		Orders[] ordersList=order.getBody();
+		for(Orders orders:ordersList) {
+			PickedUpOrders vObj=new PickedUpOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
+			pickedUpOrdersRepo.save(vObj);
+		}
+		return pickedUpOrdersRepo.findAll();
 	}
 
 	

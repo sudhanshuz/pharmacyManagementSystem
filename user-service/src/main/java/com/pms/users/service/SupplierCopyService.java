@@ -1,5 +1,6 @@
 package com.pms.users.service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -133,15 +134,36 @@ public class SupplierCopyService {
 	public List<Orders> verifyOrders() {
 		// TODO Auto-generated method stub
 		List<Orders> ordersList=ordersRepo.findAll();
-		List<Orders> verifiedList=null;
+		List<Orders> verifiedList=new ArrayList();
 		for(Orders order:ordersList) {
-			if(!order.isVerified()) {
+			if(order.isVerified()==false) {
 				//check if order is valid or not
 				order.setVerified(true);
+			}
+			if(order.isVerified()==true) {
 				verifiedList.add(order);
 			}
 		}
-		return  verifiedList;
+		
+		return  ordersRepo.saveAll(verifiedList);
+	}
+
+	public List<Orders> addOrdersToPickup() {
+		// TODO Auto-generated method stub
+		List<Orders> ordersList=ordersRepo.findAll();
+		List<Orders> pickedList=new ArrayList();
+		for(Orders order:ordersList) {
+			if(order.isVerified()==true&&order.isPickedUp()==false) {
+				//check if order is valid or not for pickup
+				order.setPickedUp(true);
+			}
+			if(order.isPickedUp()==true&&order.isVerified()==true) {
+				pickedList.add(order);	
+			}
+			
+		}
+		
+		return ordersRepo.saveAll(pickedList);
 	}
 
 }

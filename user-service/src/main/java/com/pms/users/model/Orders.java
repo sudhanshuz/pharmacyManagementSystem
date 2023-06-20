@@ -28,6 +28,7 @@ public class Orders {
 	private Date pickupDate;//auto added
 	private HashMap<String,Integer> drugInfo;
 	private boolean verified=false;
+	private boolean pickedUp=false;
 	
 	
 }
