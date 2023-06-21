@@ -15,9 +15,11 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import com.pms.orders.exception.ResourceNotFoundException;
+import com.pms.orders.model.NewOrders;
 import com.pms.orders.model.Orders;
 import com.pms.orders.model.PickedUpOrders;
 import com.pms.orders.model.VerifiedOrders;
+import com.pms.orders.repository.NewOrdersRepo;
 import com.pms.orders.repository.OrdersRepository;
 import com.pms.orders.repository.PickedUpOrdersRepo;
 import com.pms.orders.repository.VerifiedOrdersRepo;
@@ -32,6 +34,8 @@ public class OrdersService {
 PickedUpOrdersRepo pickedUpOrdersRepo;
 	@Autowired
 	VerifiedOrdersRepo verifiedOrderRepo;
+	@Autowired
+	NewOrdersRepo newOrdersRepo;
 	@Autowired
 	RestTemplate restTemplate;
 	public Orders addOrder(Orders order) {
@@ -50,6 +54,9 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
         order.setTotal(total);
 		Date pickupDate=restTemplate.getForObject("http://SUPPLIER-SERVICE/supplier/setPickupDate/"+order.getOrderId(),Date.class);
 		order.setPickupDate(pickupDate);
+		
+		NewOrders vObj=new NewOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo());
+		newOrdersRepo.insert(vObj);
         
 	return orderRepository.insert(order);	
 	}
@@ -95,28 +102,29 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 		return orderRepository.findById(orderId).orElse(null);
 	}
 
-	public List<VerifiedOrders> viewVerifiedOrders() {
-		// TODO Auto-generated method stub
-		String url="http://USERS-SERVICE/user/viewOrders";
-		ResponseEntity<Orders[]> order=restTemplate.getForEntity(url,Orders[].class);
-		Orders[] ordersList=order.getBody();
-		for(Orders orders:ordersList) {
-			VerifiedOrders vObj=new VerifiedOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
-			verifiedOrderRepo.save(vObj);
-		}
+	public List<VerifiedOrders> viewVerifiedOrders(Orders[] orderList) {
+		
+		for(Orders orders:orderList) {
+		VerifiedOrders vObj=new VerifiedOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
+		verifiedOrderRepo.save(vObj);
+	}
+		
 		return verifiedOrderRepo.findAll();
 	}
 
-	public List<PickedUpOrders> viewPickedUpOrders() {
+	public List<PickedUpOrders> viewPickedUpOrders(Orders[] orderList) {
 		// TODO Auto-generated method stub
-		String url="http://USERS-SERVICE/user/pickUpOrders";
-		ResponseEntity<Orders[]> order=restTemplate.getForEntity(url,Orders[].class);
-		Orders[] ordersList=order.getBody();
-		for(Orders orders:ordersList) {
+
+		for(Orders orders:orderList) {
 			PickedUpOrders vObj=new PickedUpOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
 			pickedUpOrdersRepo.save(vObj);
 		}
 		return pickedUpOrdersRepo.findAll();
+	}
+
+	public List<NewOrders> viewNewOrders() {
+		// TODO Auto-generated method stub
+		return newOrdersRepo.findAll();
 	}
 
 	

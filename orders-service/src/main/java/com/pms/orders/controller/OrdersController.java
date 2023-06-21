@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pms.orders.exception.ResourceNotFoundException;
+import com.pms.orders.model.NewOrders;
 import com.pms.orders.model.Orders;
 import com.pms.orders.model.PickedUpOrders;
 import com.pms.orders.model.VerifiedOrders;
@@ -70,13 +71,18 @@ public class OrdersController {
 		return ordersService.deleteOrder(Long.parseLong(orderId));
 	}
 	
-	@GetMapping("/viewVerifiedOrders")
-	public List<VerifiedOrders> viewVerifiedOrders() {
-		return ordersService.viewVerifiedOrders();
+	@PostMapping("/addVerifiedOrders")
+	public List<VerifiedOrders> viewVerifiedOrders(@RequestBody Orders[] orderList ) {
+		return ordersService.viewVerifiedOrders(orderList);
 	}
 	
-	@GetMapping("/viewPickedUpOrders")
-	public List<PickedUpOrders> viewPickedUpOrders() {
-		return ordersService.viewPickedUpOrders();
+	@PostMapping("/addPickedUpOrders")
+	public List<PickedUpOrders> viewPickedUpOrders(@RequestBody Orders[] orderList) {
+		return ordersService.viewPickedUpOrders(orderList);
+	}
+	
+	@GetMapping("/addNewOrders")
+	public List<NewOrders> viewNewOrders() {
+		return ordersService.viewNewOrders();
 	}
 }

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -59,7 +60,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/getAll")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PostAuthorize("hasRole('ADMIN')")
 	public List<User> getUsers() {
 		return userService.getAll();
 	}
@@ -189,5 +190,9 @@ public class UserController {
 		//restTemplate.
 		
 		return supplierCopyService.placeOrder(order);
+	}
+	@GetMapping("/viewNewOrders")
+	public Orders[] viewNewOrders(){
+		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/addNewOrders",Orders[].class);
 	}
 }

@@ -126,9 +126,9 @@ public class SupplierCopyService {
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
+       
         Orders orderUpdated=restTemplate.postForObject("http://ORDERS-SERVICE/orders/add", requestEntity, Orders.class);
-        //=restTemplate.getForObject("http://ORDERS-SERVICE/orders/getOrdersById"+,Orders.class);
-		return ordersRepo.save(orderUpdated);
+		return ordersRepo.insert(orderUpdated);
 	}
 
 	public List<Orders> verifyOrders() {
@@ -144,6 +144,10 @@ public class SupplierCopyService {
 				verifiedList.add(order);
 			}
 		}
+		
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Orders[] verifiedOrders=restTemplate.postForObject("http://ORDERS-SERVICE/orders/addVerifiedOrders",verifiedList, Orders[].class);
 		
 		return  ordersRepo.saveAll(verifiedList);
 	}
@@ -162,6 +166,10 @@ public class SupplierCopyService {
 			}
 			
 		}
+		
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        Orders[] PickedOrders=restTemplate.postForObject("http://ORDERS-SERVICE/orders/addPickedUpOrders",pickedList, Orders[].class);
 		
 		return ordersRepo.saveAll(pickedList);
 	}
