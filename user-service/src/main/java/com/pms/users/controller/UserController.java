@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PostAuthorize;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,19 +16,24 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
+import com.pms.users.model.AuthRequest;
 import com.pms.users.model.Drugs;
 import com.pms.users.model.Orders;
 import com.pms.users.model.Supplier;
 import com.pms.users.model.User;
 import com.pms.users.repository.SupplyRepo;
 import com.pms.users.repository.UserRepository;
+import com.pms.users.service.JwtService;
 import com.pms.users.service.SequenceGeneratorService;
 import com.pms.users.service.SupplierCopyService;
 import com.pms.users.service.UserService;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 @RestController
 @RequestMapping("/user")
 public class UserController {
@@ -46,6 +52,11 @@ public class UserController {
 	private SupplyRepo supplyRepo;
 	@Autowired
 	private RestTemplate restTemplate;
+	@Autowired
+	private JwtService jwtService;
+	
+	@Autowired
+    private AuthenticationManager authenticationManager;
 	
 	Logger logger=LoggerFactory.getLogger(UserController.class);
 	
@@ -60,7 +71,7 @@ public class UserController {
 	}
 	
 	@GetMapping("/getAll")
-	@PostAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<User> getUsers() {
 		return userService.getAll();
 	}
@@ -195,4 +206,16 @@ public class UserController {
 	public Orders[] viewNewOrders(){
 		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/addNewOrders",Orders[].class);
 	}
+	
+	 @PostMapping("/authenticate")
+	    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+	        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
+	        if (authentication.isAuthenticated()) {
+	            return jwtService.generateToken(authRequest.getUsername());
+	        } else {
+	            throw new UsernameNotFoundException("invalid user request !");
+	        }
+
+
+	    }
 }
