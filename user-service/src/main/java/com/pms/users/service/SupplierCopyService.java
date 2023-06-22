@@ -35,21 +35,17 @@ public class SupplierCopyService {
 	@Autowired
 	private RestTemplate restTemplate;
 
-	public List<Supplier> addSupplier() {
-		String url="http://SUPPLIER-SERVICE/supplier/getAll";
+	public Supplier addSupplier(Supplier supplier) {
+		String url="http://SUPPLIER-SERVICE/supplier/add";
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Supplier> requestEntity = new HttpEntity<>(supplier, headers);
+       
+        Supplier addedSupplier=restTemplate.postForObject(url, requestEntity,Supplier.class);
 		
-		ResponseEntity<Supplier[]> suppliers=restTemplate.getForEntity(url,Supplier[].class);
 		
-		Supplier[] supp=suppliers.getBody();
-		//implement logic to verify supplier and then add them
-		for(Supplier sObj:supp) {
-			if(supplyRepo.findBySupplierPhoneNo(sObj.getSupplierPhoneNo())!=null){
-				//send message as contact already exists
-				logger.info(sObj.getSupplierPhoneNo()+"contact already exists");
-			}
-			supplyRepo.insert(sObj);
-		}
-		return supplyRepo.findAll();
+		return addedSupplier;
 	}
 
 	public List<Orders> addAllOrders() {
@@ -63,93 +59,87 @@ public class SupplierCopyService {
 		return ordersRepo.findAll();
 	}
 
-	public Supplier editSupplier(Supplier supplier) {
+	public String editSupplier(Supplier supplier) {
 		// TODO Auto-generated method stub
-		int supId=supplier.getSupplierId();
-		if(supplyRepo.findById(supId)==null) {
-			logger.info("invalid supplier");
-		}
-		return supplyRepo.save(supplier);
+		restTemplate.put("http://SUPPLIER-SERVICE/supplier/edit", supplier);
+		return "supplier updated successfully";
 	}
 
 	public String deleteSupplier(int supplierId) {
 		// TODO Auto-generated method stub
-		try {
-		supplyRepo.deleteById(supplierId);}
-		catch(Exception e) {
-			e.printStackTrace();
-		}
+			restTemplate.delete("http://SUPPLIER-SERVICE/supplier/delete/"+supplierId, supplierId);
 		return "supplier deleted succesfully";
 	}
 
-	public List<Supplier> viewAllSuppliers() {
+	public Supplier[] viewAllSuppliers() {
 		// TODO Auto-generated method stub
-		return supplyRepo.findAll();
+		String url="http://SUPPLIER-SERVICE/supplier/getAll";
+		ResponseEntity<Supplier[]> supplier=restTemplate.getForEntity(url,Supplier[].class);
+		Supplier[] supplierList=supplier.getBody();
+		return supplierList;
 	}
 
-	public List<Orders> viewAllOrders() {
+	public Orders[] viewAllOrders() {
 		// TODO Auto-generated method stub
-		return ordersRepo.findAll();
+		String url="http://ORDERS-SERVICE/orders/getAll";
+		ResponseEntity<Orders[]> orders=restTemplate.getForEntity(url,Orders[].class);
+		Orders[] ordersList=orders.getBody();
+		return ordersList;
 		
 	}
 
-	public List<Drugs> addDrugs() {
+	public Drugs addDrugs(Drugs drug) {
 		// TODO Auto-generated method stub
-		String url="http://SUPPLIER-SERVICE/drugs/getAll";
-		ResponseEntity<Drugs[]> drugs=restTemplate.getForEntity(url,Drugs[].class);
-		Drugs[] drugsList=drugs.getBody();
-		for(Drugs drugObj:drugsList) {
-			drugrepo.insert(drugObj);
-		}
-		return drugrepo.findAll();
+		String url="http://SUPPLIER-SERVICE/drugs/add";
+		HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        HttpEntity<Drugs> requestEntity = new HttpEntity<>(drug, headers);
+       
+        Drugs addedDrug=restTemplate.postForObject(url, requestEntity,Drugs.class);
+		return addedDrug;
 	}
 
-	public Drugs editDrugs(Drugs drug) {
+	public String editDrugs(Drugs drug) {
 		// TODO Auto-generated method stub
-		return drugrepo.save(drug);
+		restTemplate.put("http://SUPPLIER-SERVICE/drugs/edit", drug);
+		return "drug details updated successfully";
 	}
 
 	public String deleteDrugs(String drugName) {
 		// TODO Auto-generated method stub
-		drugrepo.deleteById(drugName);
+		restTemplate.delete("http://SUPPLIER-SERVICE/drugs/deleteDrugByName/"+drugName,drugName);
 		return "drug deleted successfully";
 	}
 
-	public List<Drugs> viewDrugs() {
+	public Drugs[] viewDrugs() {
 		// TODO Auto-generated method stub
-		return drugrepo.findAll();
+		String url="http://SUPPLIER-SERVICE/drugs/getAll";
+		ResponseEntity<Drugs[]> drugs=restTemplate.getForEntity(url,Drugs[].class);
+		Drugs[] drugsList=drugs.getBody();
+		return drugsList;
 	}
 
 	public Orders placeOrder(Orders order) {
-		// TODO Auto-generated method stub
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
 
         HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
-       
         Orders orderUpdated=restTemplate.postForObject("http://ORDERS-SERVICE/orders/add", requestEntity, Orders.class);
-		return ordersRepo.insert(orderUpdated);
+        //send msg to admin regarding new order
+		return orderUpdated;
 	}
 
-	public List<Orders> verifyOrders() {
-		// TODO Auto-generated method stub
-		List<Orders> ordersList=ordersRepo.findAll();
-		List<Orders> verifiedList=new ArrayList();
-		for(Orders order:ordersList) {
-			if(order.isVerified()==false) {
-				//check if order is valid or not
-				order.setVerified(true);
-			}
-			if(order.isVerified()==true) {
-				verifiedList.add(order);
-			}
-		}
-		
+	public String verifyOrders(long orderId) {
+		Orders order=restTemplate.getForObject("http://ORDERS-SERVICE/orders/getOrdersById/"+orderId,Orders.class);
+		order.setVerified(true);
+		System.out.println(order);
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
-        Orders[] verifiedOrders=restTemplate.postForObject("http://ORDERS-SERVICE/orders/addVerifiedOrders",verifiedList, Orders[].class);
+        HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
+        restTemplate.postForObject("http://ORDERS-SERVICE/orders/addVerifiedOrders",requestEntity, Orders.class);
 		
-		return  ordersRepo.saveAll(verifiedList);
+		return  "order verified successfully";
 	}
 
 	public List<Orders> addOrdersToPickup() {

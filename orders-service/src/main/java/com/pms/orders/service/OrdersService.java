@@ -102,14 +102,13 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 		return orderRepository.findById(orderId).orElse(null);
 	}
 
-	public List<VerifiedOrders> viewVerifiedOrders(Orders[] orderList) {
+	public VerifiedOrders addVerifiedOrders(Orders order) {
 		
-		for(Orders orders:orderList) {
-		VerifiedOrders vObj=new VerifiedOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
+		VerifiedOrders vObj=new VerifiedOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo(),true,false);
 		verifiedOrderRepo.save(vObj);
-	}
-		
-		return verifiedOrderRepo.findAll();
+		orderRepository.save(order);
+		newOrdersRepo.deleteById(vObj.getOrderId());
+		return vObj;
 	}
 
 	public List<PickedUpOrders> viewPickedUpOrders(Orders[] orderList) {

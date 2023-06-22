@@ -10,11 +10,13 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Document(collection="OrdersCopy")
+@ToString
 public class Orders {
 	@Id
 	private Long orderId;//auto added

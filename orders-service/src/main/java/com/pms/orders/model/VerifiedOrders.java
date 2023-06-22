@@ -27,4 +27,19 @@ public class VerifiedOrders {
 	private double total; //auto added
 	private Date pickupDate;//auto added
 	private HashMap<String,Integer> drugInfo;
+	private boolean verified=false;
+	private boolean pickedUp=false;
+	public VerifiedOrders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
+			@NotEmpty(message = "cannot be blank") long docContact,
+			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate,
+			HashMap<String, Integer> drugInfo) {
+		super();
+		this.orderId = orderId;
+		this.docName = docName;
+		this.docContact = docContact;
+		this.docEmail = docEmail;
+		this.total = total;
+		this.pickupDate = pickupDate;
+		this.drugInfo = drugInfo;
+	}
 }

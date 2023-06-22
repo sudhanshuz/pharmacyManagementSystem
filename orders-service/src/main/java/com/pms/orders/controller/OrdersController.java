@@ -72,8 +72,8 @@ public class OrdersController {
 	}
 	
 	@PostMapping("/addVerifiedOrders")
-	public List<VerifiedOrders> viewVerifiedOrders(@RequestBody Orders[] orderList ) {
-		return ordersService.viewVerifiedOrders(orderList);
+	public VerifiedOrders addVerifiedOrders(@RequestBody Orders order ) {
+		return ordersService.addVerifiedOrders(order);
 	}
 	
 	@PostMapping("/addPickedUpOrders")
@@ -81,7 +81,7 @@ public class OrdersController {
 		return ordersService.viewPickedUpOrders(orderList);
 	}
 	
-	@GetMapping("/addNewOrders")
+	@GetMapping("/viewNewOrders")
 	public List<NewOrders> viewNewOrders() {
 		return ordersService.viewNewOrders();
 	}

@@ -13,7 +13,14 @@ public class User {
 	private long contact;
 	private String email;
 	private String password;
-	private String role;
+	private String role="ROLE_DOCTOR";
+	public User(String name, long contact, String email, String password) {
+		super();
+		this.name = name;
+		this.contact = contact;
+		this.email = email;
+		this.password = password;
+	}
 	public long getUserId() {
 		return userId;
 	}

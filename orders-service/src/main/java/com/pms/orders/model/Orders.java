@@ -14,6 +14,7 @@ import jakarta.validation.constraints.NotEmpty;
 @Document(collection="Orders")
 @Component
 public class Orders {
+
 	@Transient
 	public static final String SEQUENCE_NAME="orders_sequence";
 	@Id
@@ -27,9 +28,39 @@ public class Orders {
 	private double total; //auto added
 	private Date pickupDate;//auto added
 	private HashMap<String,Integer> drugInfo;
+	private boolean verified=false;
+	private boolean pickedUp=false;
+	
+	
 	//private String supplierName
 	
 	
+	
+	public boolean isVerified() {
+		return verified;
+	}
+	public Orders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
+			@NotEmpty(message = "cannot be blank") long docContact,
+			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate,
+			HashMap<String, Integer> drugInfo) {
+		super();
+		this.orderId = orderId;
+		this.docName = docName;
+		this.docContact = docContact;
+		this.docEmail = docEmail;
+		this.total = total;
+		this.pickupDate = pickupDate;
+		this.drugInfo = drugInfo;
+	}
+	public void setVerified(boolean verified) {
+		this.verified = verified;
+	}
+	public boolean isPickedUp() {
+		return pickedUp;
+	}
+	public void setPickedUp(boolean pickedUp) {
+		this.pickedUp = pickedUp;
+	}
 	
 	public HashMap<String, Integer> getDrugInfo() {
 		return drugInfo;

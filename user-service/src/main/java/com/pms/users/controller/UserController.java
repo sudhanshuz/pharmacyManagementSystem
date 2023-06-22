@@ -60,15 +60,15 @@ public class UserController {
 	
 	Logger logger=LoggerFactory.getLogger(UserController.class);
 	
+	//done 
+	
 	@PostMapping("/add")
 	public User saveUser(@RequestBody User user) {
-		if(user.getRole().equals("ROLE_ADMIN")||user.getRole().equals("ADMIN")||user.getRole().equals("admin")){
-			logger.error("please put your role as doctor");
-			return null;
-		}
 		user.setUserId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
 		return userService.saveUser(user);
 	}
+	
+	//done
 	
 	@GetMapping("/getAll")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -76,74 +76,86 @@ public class UserController {
 		return userService.getAll();
 	}
 	
+	//done
+	
 	@GetMapping("/getUserById/{userId}")
-	@PreAuthorize("hasAnyRole('ADMIN','DOCTOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public User getUserByUserId(@PathVariable String userId) {
 		return userService.getUserByUserId(Long.parseLong(userId));
 	}
 	
+	//done
+	
 	@PutMapping("/edit")
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public User editUser(@RequestBody User user) {
 		return userService.editUser(user);
 	}
 	
+	//done
 	
 	@DeleteMapping("deleteById/{userId}")
-	@PreAuthorize("hasRole('ADMIN','DOCTOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public User deleteUserById(@PathVariable String userId) {
 		return userService.deleteUserById(Long.parseLong(userId));
 	}
 	
+	//done
 	
 	@GetMapping("/getByName/{name}")
-	@PreAuthorize("hasAnyRole('ADMIN','DOCTOR')")
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public Optional<User> findByUserName(@PathVariable String name) {
 		return userService.getByName(name);	
 	}
 	
+	//done
 	
-	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/addSuppliers")
-	public List<Supplier> addSupplier() {
-		//ResponseEntity<List<Supplier>> suppliers=restTemplate.getForEntity("http://SUPPLIER-SERVICE/supplier/getAll",(Supplier[].class);
-		return supplierCopyService.addSupplier();
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/addSuppliers")
+	public Supplier addSupplier(@RequestBody Supplier supplier) {
+		return supplierCopyService.addSupplier(supplier);
 	}
 	
+	//pending
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/addOrders")
 	public List<Orders> addAllOrders() {
 		
 		return supplierCopyService.addAllOrders();
 	}
 	
-	//@PreAuthorize("hasRole('ADMIN')")
+	//done
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/viewOrders")
-	public List<Orders> viewAllOrders() {
+	public Orders[] viewAllOrders() {
 		
 		return supplierCopyService.viewAllOrders();
 	}
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	//done
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/viewSuppliers")
-	public List<Supplier> viewAllSuppliers() {
+	public Supplier[] viewAllSuppliers() {
 		
 		return supplierCopyService.viewAllSuppliers();
 	}
 	
 	
-	@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/addDrugs")
-	public List<Drugs> addDrugs() {
+	//done
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PostMapping("/addDrugs")
+	public Drugs addDrugs(@RequestBody Drugs drug) {
 		
-		return supplierCopyService.addDrugs();
+		return supplierCopyService.addDrugs(drug);
 	}
 	
 	
-		
+	//done
 	
-	@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteDrug/{drugName}")
 	public String deleteDrugs(@PathVariable String drugName) {
 		return supplierCopyService.deleteDrugs(drugName);
@@ -151,60 +163,64 @@ public class UserController {
 	
 	
 	
-	
-	@PreAuthorize("hasAnyRole('ADMIN','DOCTOR')")
+	//done
+	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	@GetMapping("/viewDrugs")
-	public List<Drugs> viewDrugs() {
+	public Drugs[] viewDrugs() {
 		return supplierCopyService.viewDrugs();
 	}
 	
-	
-	@PreAuthorize("hasRole('ADMIN')")
+	//done
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editDrugs")
-	public Drugs editDrugs(@RequestBody Drugs drug) {
+	public String editDrugs(@RequestBody Drugs drug) {
 		return supplierCopyService.editDrugs(drug);
 	}
 	
-	
-	@PreAuthorize("hasRole('ADMIN')")
+	//done
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteSupplier/{supplierId}")
 	public String deleteSupplier(@PathVariable String supplierId) {
 		
 		return supplierCopyService.deleteSupplier(Integer.parseInt(supplierId));
 	}
 	
-	
-	@PreAuthorize("hasRole('ADMIN')")
+	//done
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editSuppliers")
-	public Supplier editSupplier(@RequestBody Supplier supplier) {
+	public String editSupplier(@RequestBody Supplier supplier) {
 		return supplierCopyService.editSupplier(supplier);
 	}
 	
 	
-	//@PreAuthorize("hasRole('ADMIN')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/pickUpOrders")
 	public List<Orders> addOrdersToPickup() {
 		
 		return supplierCopyService.addOrdersToPickup();
 	}
 	
-	//@PreAuthorize("hasRole('ADMIN')")
-	@GetMapping("/verifyOrders")
-	public List<Orders> verifyOrders() {
+	//done
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@PutMapping("/verifyOrderByOrderId/{orderId}")
+	public String verifyOrders(@PathVariable String orderId) {
 		
-		return supplierCopyService.verifyOrders();
+		return supplierCopyService.verifyOrders(Long.parseLong(orderId));
 	}
 	
-	//@PreAuthorize("hasRole('DOCTOR')")
+	//done
+	@PreAuthorize("hasRole('ROLE_DOCTOR')")
 	@PostMapping("/placeOrder")
 	public Orders placeOrder(@RequestBody Orders order) {
-		//restTemplate.
 		
 		return supplierCopyService.placeOrder(order);
 	}
+	
+	//done
 	@GetMapping("/viewNewOrders")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public Orders[] viewNewOrders(){
-		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/addNewOrders",Orders[].class);
+		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewNewOrders",Orders[].class);
 	}
 	
 	 @PostMapping("/authenticate")
