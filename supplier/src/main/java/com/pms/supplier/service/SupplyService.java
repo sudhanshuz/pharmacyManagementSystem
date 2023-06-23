@@ -1,14 +1,20 @@
 package com.pms.supplier.service;
 
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import com.pms.supplier.exception.ResourceNotFoundException;
 import com.pms.supplier.model.Drugs;
+import com.pms.supplier.model.Orders;
 import com.pms.supplier.model.Supplier;
 import com.pms.supplier.repository.DrugRepository;
 import com.pms.supplier.repository.SupplierRepository;
@@ -22,6 +28,8 @@ public class SupplyService {
 	
 	@Autowired
 	private DrugRepository drugRepository;
+	@Autowired
+	private RestTemplate restTemplate;
 	
 	public List<Supplier> viewSuppliers() {
 		return supplierRepository.findAll();
@@ -93,5 +101,26 @@ public class SupplyService {
 
 	public Supplier editSupplier(Supplier supplier) {
 		return supplierRepository.save(supplier);
+	}
+	
+	public String pickUpOrder(Long orderId) {
+		Orders[] orders= restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewVerifiedOrders",Orders[].class);
+		for(Orders order:orders) {
+			if(order.getOrderId()==orderId) {
+				order.setPickedUp(true);
+				order.setPickupDate(new Date());
+				HttpHeaders headers = new HttpHeaders();
+		        headers.setContentType(MediaType.APPLICATION_JSON);
+
+		        HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
+				restTemplate.postForObject("http://ORDERS-SERVICE/orders/addPickedUpOrders", requestEntity, Orders.class);
+				break;
+			}
+		}
+		return "order has been picked up successfully";
+	}
+
+	public Orders[] serviceObj() {
+		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewVerifiedOrders",Orders[].class);
 	}
 }

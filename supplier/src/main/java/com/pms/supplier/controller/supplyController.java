@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 import com.pms.supplier.exception.ResourceNotFoundException;
+import com.pms.supplier.model.Orders;
 import com.pms.supplier.model.Supplier;
 import com.pms.supplier.service.SupplyService;
 
@@ -58,5 +59,14 @@ public class supplyController {
 	@PutMapping("/edit")
 	public Supplier editSupplier(@RequestBody Supplier supplier) {
 		return serviceObj.editSupplier(supplier);
+	}
+	@GetMapping("/viewAvailableOrders")
+	public Orders[] viewAvailableOrders() {
+		return serviceObj.serviceObj();
+	}
+	
+	@PutMapping("/pickUpOrder/{orderId}")
+	public String pickUpOrder(@PathVariable String orderId) {
+		return serviceObj.pickUpOrder(Long.parseLong(orderId));
 	}
 }

@@ -77,12 +77,17 @@ public class OrdersController {
 	}
 	
 	@PostMapping("/addPickedUpOrders")
-	public List<PickedUpOrders> viewPickedUpOrders(@RequestBody Orders[] orderList) {
-		return ordersService.viewPickedUpOrders(orderList);
+	public Orders addPickedUpOrders(@RequestBody Orders order) {
+		return ordersService.addPickedUpOrders(order);
 	}
 	
 	@GetMapping("/viewNewOrders")
 	public List<NewOrders> viewNewOrders() {
 		return ordersService.viewNewOrders();
+	}
+	
+	@GetMapping("viewVerifiedOrders")
+	public List<VerifiedOrders> viewVerifiedOrders(){
+		return ordersService.viewVerifiedOrders();
 	}
 }

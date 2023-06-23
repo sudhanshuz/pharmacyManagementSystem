@@ -1,24 +1,21 @@
-package com.pms.users.model;
+package com.pms.supplier.model;
 
 import java.util.Date;
-
 import java.util.HashMap;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.validation.constraints.NotEmpty;
 
-import jakarta.validation.constraints.NotEmpty;
+import org.springframework.data.annotation.Id;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.ToString;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Document(collection="OrdersCopy")
-@ToString
 public class Orders {
+
 	@Id
 	private Long orderId;//auto added
 	@NotEmpty(message="cannot be blank")
@@ -32,6 +29,4 @@ public class Orders {
 	private HashMap<String,Integer> drugInfo;
 	private boolean verified=false;
 	private boolean pickedUp=false;
-	
-	
 }

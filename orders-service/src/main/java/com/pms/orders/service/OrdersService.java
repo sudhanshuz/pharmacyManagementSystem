@@ -111,19 +111,22 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 		return vObj;
 	}
 
-	public List<PickedUpOrders> viewPickedUpOrders(Orders[] orderList) {
+	public Orders addPickedUpOrders(Orders order) {
 		// TODO Auto-generated method stub
-
-		for(Orders orders:orderList) {
-			PickedUpOrders vObj=new PickedUpOrders(orders.getOrderId(),orders.getDocName(),orders.getDocContact(),orders.getDocEmail(),orders.getTotal(),orders.getPickupDate(),orders.getDrugInfo());
-			pickedUpOrdersRepo.save(vObj);
-		}
-		return pickedUpOrdersRepo.findAll();
+			PickedUpOrders pObj=new PickedUpOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo(),order.isVerified(),order.isPickedUp());
+			pickedUpOrdersRepo.save(pObj);
+			verifiedOrderRepo.deleteById(order.getOrderId());
+			return order;
 	}
 
 	public List<NewOrders> viewNewOrders() {
 		// TODO Auto-generated method stub
 		return newOrdersRepo.findAll();
+	}
+
+	public List<VerifiedOrders> viewVerifiedOrders() {
+		// TODO Auto-generated method stub
+		return verifiedOrderRepo.findAll();
 	}
 
 	

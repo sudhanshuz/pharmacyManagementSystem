@@ -192,7 +192,7 @@ public class UserController {
 		return supplierCopyService.editSupplier(supplier);
 	}
 	
-	
+	//pending
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/pickUpOrders")
 	public List<Orders> addOrdersToPickup() {
@@ -223,6 +223,7 @@ public class UserController {
 		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewNewOrders",Orders[].class);
 	}
 	
+	//done
 	 @PostMapping("/authenticate")
 	    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
 	        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
