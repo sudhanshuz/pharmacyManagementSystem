@@ -1,6 +1,7 @@
 package com.pms.supplier.service;
 
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -123,5 +124,16 @@ public class SupplyService {
 
 	public Orders[] serviceObj() {
 		return restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewVerifiedOrders",Orders[].class);
+	}
+
+	public List<Orders> findMyOrders(int supplierId) {
+		Orders[] orders= restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewPickedUpOrders",Orders[].class);
+		List<Orders> myOrders=new ArrayList<>();
+		for(Orders order:orders) {
+			if(order.getSupplierId()==supplierId) {
+			myOrders.add(order);
+			}
+		}
+		return myOrders;
 	}
 }

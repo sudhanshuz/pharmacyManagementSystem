@@ -69,4 +69,9 @@ public class supplyController {
 	public String pickUpOrder(@PathVariable String orderId,@PathVariable String supplierId) {
 		return serviceObj.pickUpOrder(Long.parseLong(orderId),Integer.parseInt(supplierId));
 	}
+	
+	@GetMapping("/findMyOrders/{supplierId}")
+	public List<Orders> findMyOrders(@PathVariable String supplierId) {
+		return serviceObj.findMyOrders(Integer.parseInt(supplierId));
+	}
 }
