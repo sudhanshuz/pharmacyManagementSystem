@@ -29,10 +29,11 @@ public class PickedUpOrders {
 	private HashMap<String,Integer> drugInfo;
 	private boolean verified=false;
 	private boolean pickedUp=false;
+
 	public PickedUpOrders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
 			@NotEmpty(message = "cannot be blank") long docContact,
 			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate,
-			HashMap<String, Integer> drugInfo) {
+			HashMap<String, Integer> drugInfo, boolean verified, boolean pickedUp) {
 		super();
 		this.orderId = orderId;
 		this.docName = docName;
@@ -41,5 +42,9 @@ public class PickedUpOrders {
 		this.total = total;
 		this.pickupDate = pickupDate;
 		this.drugInfo = drugInfo;
+		this.verified = verified;
+		this.pickedUp = pickedUp;
 	}
+
+	private int supplierId;
 }

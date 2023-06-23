@@ -1,6 +1,7 @@
 package com.pms.users.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -24,11 +25,10 @@ import com.pms.users.model.Drugs;
 import com.pms.users.model.Orders;
 import com.pms.users.model.Supplier;
 import com.pms.users.model.User;
-import com.pms.users.repository.SupplyRepo;
 import com.pms.users.repository.UserRepository;
 import com.pms.users.service.JwtService;
 import com.pms.users.service.SequenceGeneratorService;
-import com.pms.users.service.SupplierCopyService;
+import com.pms.users.service.MasterService;
 import com.pms.users.service.UserService;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -42,14 +42,11 @@ public class UserController {
 	
 	@Autowired
 	private SequenceGeneratorService sequenceGeneratorService;
+
 	
 	@Autowired
-	private UserRepository userRepository;
-	
-	@Autowired
-	private SupplierCopyService supplierCopyService;
-	@Autowired
-	private SupplyRepo supplyRepo;
+	private MasterService masterService;
+
 	@Autowired
 	private RestTemplate restTemplate;
 	@Autowired
@@ -113,25 +110,25 @@ public class UserController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addSuppliers")
 	public Supplier addSupplier(@RequestBody Supplier supplier) {
-		return supplierCopyService.addSupplier(supplier);
-	}
-	
-	//pending
-	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/addOrders")
-	public List<Orders> addAllOrders() {
-		
-		return supplierCopyService.addAllOrders();
+		return masterService.addSupplier(supplier);
 	}
 	
 	//done
 	
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/viewOrders")
-	public Orders[] viewAllOrders() {
+	@PutMapping("/addPickedUpOrders")
+	public List<Orders> addAllOrders() {
 		
-		return supplierCopyService.viewAllOrders();
+		return masterService.addAllOrders();
+	}
+	
+	//done
+	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	@GetMapping("/viewPickedUpOrders")
+	public Orders[] viewPickedUpOrders() {
+		
+		return masterService.viewPickedUpOrders();
 	}
 	
 	//done
@@ -140,7 +137,7 @@ public class UserController {
 	@GetMapping("/viewSuppliers")
 	public Supplier[] viewAllSuppliers() {
 		
-		return supplierCopyService.viewAllSuppliers();
+		return masterService.viewAllSuppliers();
 	}
 	
 	
@@ -149,7 +146,7 @@ public class UserController {
 	@PostMapping("/addDrugs")
 	public Drugs addDrugs(@RequestBody Drugs drug) {
 		
-		return supplierCopyService.addDrugs(drug);
+		return masterService.addDrugs(drug);
 	}
 	
 	
@@ -158,7 +155,7 @@ public class UserController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteDrug/{drugName}")
 	public String deleteDrugs(@PathVariable String drugName) {
-		return supplierCopyService.deleteDrugs(drugName);
+		return masterService.deleteDrugs(drugName);
 	}
 	
 	
@@ -167,14 +164,14 @@ public class UserController {
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	@GetMapping("/viewDrugs")
 	public Drugs[] viewDrugs() {
-		return supplierCopyService.viewDrugs();
+		return masterService.viewDrugs();
 	}
 	
 	//done
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editDrugs")
 	public String editDrugs(@RequestBody Drugs drug) {
-		return supplierCopyService.editDrugs(drug);
+		return masterService.editDrugs(drug);
 	}
 	
 	//done
@@ -182,30 +179,23 @@ public class UserController {
 	@DeleteMapping("/deleteSupplier/{supplierId}")
 	public String deleteSupplier(@PathVariable String supplierId) {
 		
-		return supplierCopyService.deleteSupplier(Integer.parseInt(supplierId));
+		return masterService.deleteSupplier(Integer.parseInt(supplierId));
 	}
 	
 	//done
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editSuppliers")
 	public String editSupplier(@RequestBody Supplier supplier) {
-		return supplierCopyService.editSupplier(supplier);
+		return masterService.editSupplier(supplier);
 	}
 	
-	//pending
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	@GetMapping("/pickUpOrders")
-	public List<Orders> addOrdersToPickup() {
-		
-		return supplierCopyService.addOrdersToPickup();
-	}
 	
 	//done
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/verifyOrderByOrderId/{orderId}")
 	public String verifyOrders(@PathVariable String orderId) {
 		
-		return supplierCopyService.verifyOrders(Long.parseLong(orderId));
+		return masterService.verifyOrders(Long.parseLong(orderId));
 	}
 	
 	//done
@@ -213,7 +203,7 @@ public class UserController {
 	@PostMapping("/placeOrder")
 	public Orders placeOrder(@RequestBody Orders order) {
 		
-		return supplierCopyService.placeOrder(order);
+		return masterService.placeOrder(order);
 	}
 	
 	//done
@@ -235,4 +225,16 @@ public class UserController {
 
 
 	    }
+	 
+	 //done
+	 @GetMapping("/searchDrugByName/{drugName}")
+	 public Drugs searchDrugsByName(@PathVariable String drugName) {
+		 return restTemplate.getForObject("http://SUPPLIER-SERVICE/drugs/viewDrugByName/"+drugName,Drugs.class);
+	 }
+	 
+	 //pending
+	 @GetMapping("viewMyOrders")
+	 public List<Orders> viewMyOrders(){
+		 return null;
+	 }
 }

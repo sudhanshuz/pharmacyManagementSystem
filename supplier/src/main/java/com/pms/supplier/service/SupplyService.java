@@ -103,12 +103,13 @@ public class SupplyService {
 		return supplierRepository.save(supplier);
 	}
 	
-	public String pickUpOrder(Long orderId) {
+	public String pickUpOrder(Long orderId,int supplierId) {
 		Orders[] orders= restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewVerifiedOrders",Orders[].class);
 		for(Orders order:orders) {
 			if(order.getOrderId()==orderId) {
 				order.setPickedUp(true);
 				order.setPickupDate(new Date());
+				order.setSupplierId(supplierId);
 				HttpHeaders headers = new HttpHeaders();
 		        headers.setContentType(MediaType.APPLICATION_JSON);
 

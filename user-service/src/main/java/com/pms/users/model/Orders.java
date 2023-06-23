@@ -33,5 +33,7 @@ public class Orders {
 	private boolean verified=false;
 	private boolean pickedUp=false;
 	
+	private int supplierId;
+	
 	
 }

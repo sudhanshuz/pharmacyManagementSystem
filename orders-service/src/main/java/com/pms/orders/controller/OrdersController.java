@@ -90,4 +90,9 @@ public class OrdersController {
 	public List<VerifiedOrders> viewVerifiedOrders(){
 		return ordersService.viewVerifiedOrders();
 	}
+	
+	@GetMapping("viewPickedUpOrders")
+	public List<PickedUpOrders> viewPickedUpOrders(){
+		return ordersService.viewPickedUpOrders();
+	}
 }

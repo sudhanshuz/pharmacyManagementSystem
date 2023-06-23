@@ -65,8 +65,8 @@ public class supplyController {
 		return serviceObj.serviceObj();
 	}
 	
-	@PutMapping("/pickUpOrder/{orderId}")
-	public String pickUpOrder(@PathVariable String orderId) {
-		return serviceObj.pickUpOrder(Long.parseLong(orderId));
+	@PutMapping("/pickUpOrder/{orderId}/{supplierId}")
+	public String pickUpOrder(@PathVariable String orderId,@PathVariable String supplierId) {
+		return serviceObj.pickUpOrder(Long.parseLong(orderId),Integer.parseInt(supplierId));
 	}
 }

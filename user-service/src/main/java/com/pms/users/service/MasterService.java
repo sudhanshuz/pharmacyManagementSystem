@@ -17,20 +17,17 @@ import com.pms.users.model.Drugs;
 import com.pms.users.model.Orders;
 import com.pms.users.model.Supplier;
 import com.pms.users.repository.OrdersRepo;
-import com.pms.users.repository.SupplyRepo;
-import com.pms.users.repository.drugRepo;
+
 
 @Service
-public class SupplierCopyService {
+public class MasterService {
 	
-	Logger logger=LoggerFactory.getLogger(SupplierCopyService.class);
+	Logger logger=LoggerFactory.getLogger(MasterService.class);
 	
-	@Autowired
-	private SupplyRepo supplyRepo;
+
 	@Autowired
 	OrdersRepo ordersRepo;
-	@Autowired
-	drugRepo drugrepo;
+
 	
 	@Autowired
 	private RestTemplate restTemplate;
@@ -49,8 +46,7 @@ public class SupplierCopyService {
 	}
 
 	public List<Orders> addAllOrders() {
-		// TODO Auto-generated method stub
-		String url="http://ORDERS-SERVICE/orders/getAll";
+		String url="http://ORDERS-SERVICE/orders/viewPickedUpOrders";
 		ResponseEntity<Orders[]> orders=restTemplate.getForEntity(url,Orders[].class);
 		Orders[] ordersList=orders.getBody();
 		for(Orders order:ordersList) {
@@ -60,28 +56,24 @@ public class SupplierCopyService {
 	}
 
 	public String editSupplier(Supplier supplier) {
-		// TODO Auto-generated method stub
 		restTemplate.put("http://SUPPLIER-SERVICE/supplier/edit", supplier);
 		return "supplier updated successfully";
 	}
 
 	public String deleteSupplier(int supplierId) {
-		// TODO Auto-generated method stub
 			restTemplate.delete("http://SUPPLIER-SERVICE/supplier/delete/"+supplierId, supplierId);
 		return "supplier deleted succesfully";
 	}
 
 	public Supplier[] viewAllSuppliers() {
-		// TODO Auto-generated method stub
 		String url="http://SUPPLIER-SERVICE/supplier/getAll";
 		ResponseEntity<Supplier[]> supplier=restTemplate.getForEntity(url,Supplier[].class);
 		Supplier[] supplierList=supplier.getBody();
 		return supplierList;
 	}
 
-	public Orders[] viewAllOrders() {
-		// TODO Auto-generated method stub
-		String url="http://ORDERS-SERVICE/orders/getAll";
+	public Orders[] viewPickedUpOrders() {
+		String url="http://ORDERS-SERVICE/orders/viewPickedUpOrders";
 		ResponseEntity<Orders[]> orders=restTemplate.getForEntity(url,Orders[].class);
 		Orders[] ordersList=orders.getBody();
 		return ordersList;
@@ -89,7 +81,6 @@ public class SupplierCopyService {
 	}
 
 	public Drugs addDrugs(Drugs drug) {
-		// TODO Auto-generated method stub
 		String url="http://SUPPLIER-SERVICE/drugs/add";
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
@@ -101,19 +92,16 @@ public class SupplierCopyService {
 	}
 
 	public String editDrugs(Drugs drug) {
-		// TODO Auto-generated method stub
 		restTemplate.put("http://SUPPLIER-SERVICE/drugs/edit", drug);
 		return "drug details updated successfully";
 	}
 
 	public String deleteDrugs(String drugName) {
-		// TODO Auto-generated method stub
 		restTemplate.delete("http://SUPPLIER-SERVICE/drugs/deleteDrugByName/"+drugName,drugName);
 		return "drug deleted successfully";
 	}
 
 	public Drugs[] viewDrugs() {
-		// TODO Auto-generated method stub
 		String url="http://SUPPLIER-SERVICE/drugs/getAll";
 		ResponseEntity<Drugs[]> drugs=restTemplate.getForEntity(url,Drugs[].class);
 		Drugs[] drugsList=drugs.getBody();
@@ -142,26 +130,5 @@ public class SupplierCopyService {
 		return  "order verified successfully";
 	}
 
-	public List<Orders> addOrdersToPickup() {
-		// TODO Auto-generated method stub
-		List<Orders> ordersList=ordersRepo.findAll();
-		List<Orders> pickedList=new ArrayList();
-		for(Orders order:ordersList) {
-			if(order.isVerified()==true&&order.isPickedUp()==false) {
-				//check if order is valid or not for pickup
-				order.setPickedUp(true);
-			}
-			if(order.isPickedUp()==true&&order.isVerified()==true) {
-				pickedList.add(order);	
-			}
-			
-		}
-		
-		HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        Orders[] PickedOrders=restTemplate.postForObject("http://ORDERS-SERVICE/orders/addPickedUpOrders",pickedList, Orders[].class);
-		
-		return ordersRepo.saveAll(pickedList);
-	}
 
 }

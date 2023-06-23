@@ -52,8 +52,6 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
      		total=total+(price*qty);
         }
         order.setTotal(total);
-		Date pickupDate=restTemplate.getForObject("http://SUPPLIER-SERVICE/supplier/setPickupDate/"+order.getOrderId(),Date.class);
-		order.setPickupDate(pickupDate);
 		
 		NewOrders vObj=new NewOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo());
 		newOrdersRepo.insert(vObj);
@@ -114,6 +112,7 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 	public Orders addPickedUpOrders(Orders order) {
 		// TODO Auto-generated method stub
 			PickedUpOrders pObj=new PickedUpOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo(),order.isVerified(),order.isPickedUp());
+			pObj.setSupplierId(order.getSupplierId());
 			pickedUpOrdersRepo.save(pObj);
 			verifiedOrderRepo.deleteById(order.getOrderId());
 			return order;
@@ -127,6 +126,11 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 	public List<VerifiedOrders> viewVerifiedOrders() {
 		// TODO Auto-generated method stub
 		return verifiedOrderRepo.findAll();
+	}
+
+	public List<PickedUpOrders> viewPickedUpOrders() {
+		// TODO Auto-generated method stub
+		return pickedUpOrdersRepo.findAll();
 	}
 
 	
