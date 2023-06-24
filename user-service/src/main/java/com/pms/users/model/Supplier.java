@@ -12,9 +12,9 @@ public class Supplier {
 	private int supplierId;
 	private String supplierName;
 	private String supplierEmail;
-	private long supplierPhoneNo;
+	private String supplierPhoneNo;
 	private List<HashMap<String,Integer>>stock=new ArrayList<>();
-	public Supplier(int supplierId, String supplierName, String supplierEmail, long supplierPhoneNo,
+	public Supplier(int supplierId, String supplierName, String supplierEmail, String supplierPhoneNo,
 			List<HashMap<String, Integer>> stock) {
 		super();
 		this.supplierId = supplierId;
@@ -41,13 +41,13 @@ public class Supplier {
 	public void setSupplierEmail(String supplierEmail) {
 		this.supplierEmail = supplierEmail;
 	}
-	public long getSupplierPhoneNo() {
+	public String getSupplierPhoneNo() {
 		return supplierPhoneNo;
 	}
-	public void setSupplierPhoneNo(long supplierPhoneNo) {
+	public void setSupplierPhoneNo(String supplierPhoneNo) {
 		this.supplierPhoneNo = supplierPhoneNo;
 	}
-	public Supplier(int supplierId, String supplierName, String supplierEmail, long supplierPhoneNo) {
+	public Supplier(int supplierId, String supplierName, String supplierEmail, String supplierPhoneNo) {
 		super();
 		this.supplierId = supplierId;
 		this.supplierName = supplierName;

@@ -2,6 +2,8 @@ package com.pms.supplier.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -27,12 +29,12 @@ public class drugController {
 	}
 	
 	@PostMapping("/add")
-	public Drugs addDrugs(@RequestBody Drugs drug) {
+	public Drugs addDrugs(@RequestBody @Valid Drugs drug) {
 		return serviceObj.insertDrug(drug);
 	}
 	
 	@GetMapping("/viewDrugByName/{name}")
-	public Drugs viewDrugByName(@PathVariable String name) {
+	public Drugs viewDrugByName(@PathVariable String name) throws ResourceNotFoundException {
 		return serviceObj.viewDrugByName(name);
 	}
 	

@@ -69,8 +69,8 @@ public class SupplyService {
 		return supplierRepository.save(supplier);
 	}
 
-	public Drugs viewDrugByName(String name) {
-		return drugRepository.findById(name).orElse(null);
+	public Drugs viewDrugByName(String name) throws ResourceNotFoundException {
+		return drugRepository.findById(name).orElseThrow(()->new ResourceNotFoundException("drug not found"));
 	}
 
 	public double getDrugPrice(String drugName) throws ResourceNotFoundException {
@@ -94,10 +94,10 @@ public class SupplyService {
 		return drugRepository.save(drug1);
 	}
 
-	public Supplier deleteSupplier(int id) {
+	public Supplier deleteSupplier(int id) throws ResourceNotFoundException {
 		
 		supplierRepository.deleteById(id);
-		return supplierRepository.findById(id).orElse(null);
+		return supplierRepository.findById(id).orElseThrow(()->new ResourceNotFoundException("supplier not found"));
 	}
 
 	public Supplier editSupplier(Supplier supplier) {

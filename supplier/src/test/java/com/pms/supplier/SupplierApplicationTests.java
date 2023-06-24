@@ -41,13 +41,13 @@ private DrugRepository drugRepository;
 	@Test
 	 void viewSuppliers() {
 		when(supplierRepository.findAll()).thenReturn(Stream.of
-				(new Supplier(101,"suresh","sb@gmail.com",878849403,null),
-						new Supplier(102,"ramesh","rb@gmail.com",878899403,null)).collect(Collectors.toList()));
+				(new Supplier(101,"suresh","sb@gmail.com","878849403",null),
+						new Supplier(102,"ramesh","rb@gmail.com","878899403",null)).collect(Collectors.toList()));
 		assertEquals(2,supplyService.viewSuppliers().size());
 	}
 	@Test
 	 void insertSuppliers() throws ResourceNotFoundException {
-		Supplier supplier=new Supplier(101,"suresh","sb@gmail.com",878849403,null);
+		Supplier supplier=new Supplier(101,"suresh","sb@gmail.com","878849403",null);
 		when(supplierRepository.insert(supplier)).thenReturn(supplier);
 		assertEquals(supplier,supplyService.insertSuppliers(supplier));
 	}

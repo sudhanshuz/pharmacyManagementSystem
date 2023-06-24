@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import com.pms.users.exceptions.ResourceNotFoundException;
 import com.pms.users.model.User;
 import com.pms.users.repository.UserRepository;
 @Service
@@ -25,8 +26,8 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User getUserByUserId(long userId) {
-		User user=userRepository.findById(userId).orElse(null);
+	public User getUserByUserId(long userId) throws ResourceNotFoundException {
+		User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("invalid user Id"));
 		return user;
 	}
 
@@ -34,8 +35,8 @@ public class UserService {
 		return userRepository.save(user);
 	}
 
-	public User deleteUserById(long userId) {
-		User user=userRepository.findById(userId).orElse(null);
+	public User deleteUserById(long userId) throws ResourceNotFoundException {
+		User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("invalid user Id"));
 		userRepository.deleteById(userId);
 		return user;
 	}

@@ -28,3 +28,5 @@ Swagger:
 supplier: http://localhost:8000/swagger-ui/index.html
 order-service:http://localhost:8001/swagger-ui.html
 user-service: localhost:8002/swagger-ui.html
+payment-service: http://localhost:8003/swagger-ui.html
+salesReport-service: http://localhost:8004/swagger-ui.html

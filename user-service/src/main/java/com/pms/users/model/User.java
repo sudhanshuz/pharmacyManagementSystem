@@ -1,20 +1,29 @@
 package com.pms.users.model;
-
 import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
+
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
+
+
 @Document(collection="user")
 public class User {
 	@Transient
 	public static final String SEQUENCE_NAME="users_sequence";
 	@Id
 	private long userId;
+	@NotEmpty(message="username should'nt be blank")
 	private String name;
-	private long contact;
+	@Pattern(regexp = "^\\d{10}$",message = "invalid mobile number entered ")
+	private String contact;
+	@Email(message="invalid email address")
 	private String email;
+	@NotEmpty(message="password should'nt be blank")
 	private String password;
 	private String role="ROLE_DOCTOR";
-	public User(String name, long contact, String email, String password) {
+	public User(String name, String contact, String email, String password) {
 		super();
 		this.name = name;
 		this.contact = contact;
@@ -33,10 +42,10 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public long getContact() {
+	public String getContact() {
 		return contact;
 	}
-	public void setContact(long contact) {
+	public void setContact(String contact) {
 		this.contact = contact;
 	}
 	public String getEmail() {
@@ -60,7 +69,7 @@ public class User {
 	public static String getSequenceName() {
 		return SEQUENCE_NAME;
 	}
-	public User(String name, long contact, String email, String password, String role) {
+	public User(String name, String contact, String email, String password, String role) {
 		super();
 		this.name = name;
 		this.contact = contact;

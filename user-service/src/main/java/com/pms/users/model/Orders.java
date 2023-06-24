@@ -1,13 +1,14 @@
 package com.pms.users.model;
 
 import java.util.Date;
-
 import java.util.HashMap;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Pattern;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,11 +22,11 @@ import lombok.ToString;
 public class Orders {
 	@Id
 	private Long orderId;//auto added
-	@NotEmpty(message="cannot be blank")
+	@NotEmpty(message="name cannot be blank")
 	private String docName;
-	@NotEmpty(message="cannot be blank")
-	private long docContact;
-	@NotEmpty(message="cannot be blank")
+	@Pattern(regexp = "^\\d{10}$",message = "invalid mobile number entered ")
+	private String docContact;
+	@Email(message="invalid email")
 	private String docEmail;
 	private double total; //auto added
 	private Date pickupDate;//auto added

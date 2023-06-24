@@ -3,6 +3,9 @@ package com.pms.supplier.model;
 import java.util.Date;
 import java.util.Objects;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,10 +13,13 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 @Document(collection="drugs")
 public class Drugs {
 	@Id
+	@NotEmpty(message="please specify drug name")
 private String drugName;
+	@NotNull(message="pleaase enter price")
 private double price;
 @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd/MM/yyyy")
 private Date exp_date;
+@NotEmpty(message="please provide batch id")
 private String batchId;
 public String getDrugName() {
 	return drugName;

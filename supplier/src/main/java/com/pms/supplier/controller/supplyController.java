@@ -2,6 +2,8 @@ package com.pms.supplier.controller;
 import java.util.Date;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,7 +39,7 @@ public class supplyController {
 	}
 	
 	@PostMapping("/add")
-	public Supplier addSuppliers(@RequestBody Supplier supplier) {
+	public Supplier addSuppliers(@RequestBody @Valid Supplier supplier) {
 		return serviceObj.insertSuppliers(supplier);
 	}
 	
@@ -51,7 +53,7 @@ public class supplyController {
 	    return new Date(new Date().getTime() + (86400000*2));
 	}
 	@DeleteMapping("/delete/{supplierId}")
-	public Supplier deleteSupplier(@PathVariable String supplierId ) {
+	public Supplier deleteSupplier(@PathVariable String supplierId ) throws ResourceNotFoundException {
 		int id=Integer.parseInt(supplierId);
 		return serviceObj.deleteSupplier(id );
 	}
