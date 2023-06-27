@@ -1,6 +1,7 @@
 package com.pms.users.controller;
 
 import java.util.List;
+
 import java.util.Optional;
 
 import org.slf4j.Logger;
@@ -57,7 +58,11 @@ public class UserController {
 	Logger logger=LoggerFactory.getLogger(UserController.class);
 	
 	//done 
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PostMapping("/add")
 	public User saveUser( @RequestBody @Valid User user) {
 		user.setUserId(sequenceGeneratorService.generateSequence(User.SEQUENCE_NAME));
@@ -65,7 +70,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/getAll")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public List<User> getUsers() {
@@ -73,15 +82,23 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/getUserById/{userId}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
-	public User getUserByUserId(@PathVariable String userId) throws NumberFormatException, ResourceNotFoundException {
+	public Optional<User> getUserByUserId(@PathVariable String userId) throws NumberFormatException, ResourceNotFoundException {
 		return userService.getUserByUserId(Long.parseLong(userId));
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PutMapping("/edit")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public User editUser(@RequestBody @Valid User user) {
@@ -89,7 +106,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@DeleteMapping("deleteById/{userId}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public User deleteUserById(@PathVariable String userId) throws NumberFormatException, ResourceNotFoundException {
@@ -97,7 +118,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/getByName/{name}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public Optional<User> findByUserName(@PathVariable String name) {
@@ -105,7 +130,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addSuppliers")
 	public Supplier addSupplier(@RequestBody Supplier supplier) {
@@ -113,7 +142,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/addPickedUpOrders")
 	public List<Orders> addAllOrders() {
@@ -122,7 +155,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/viewPickedUpOrders")
 	public Orders[] viewPickedUpOrders() {
@@ -131,7 +168,11 @@ public class UserController {
 	}
 	
 	//done
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/viewSuppliers")
 	public Supplier[] viewAllSuppliers() {
@@ -141,6 +182,11 @@ public class UserController {
 	
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addDrugs")
 	public Drugs addDrugs(@RequestBody @Valid Drugs drug) {
@@ -150,7 +196,12 @@ public class UserController {
 	
 	
 	//done
-	
+	/* Author:
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteDrug/{drugName}")
 	public String deleteDrugs(@PathVariable String drugName) {
@@ -160,6 +211,11 @@ public class UserController {
 	
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	@GetMapping("/viewDrugs")
 	public Drugs[] viewDrugs() {
@@ -167,6 +223,11 @@ public class UserController {
 	}
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editDrugs")
 	public String editDrugs(@RequestBody @Valid Drugs drug) {
@@ -174,6 +235,11 @@ public class UserController {
 	}
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteSupplier/{supplierId}")
 	public String deleteSupplier(@PathVariable String supplierId) {
@@ -182,6 +248,11 @@ public class UserController {
 	}
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editSuppliers")
 	public String editSupplier(@RequestBody @Valid Supplier supplier) {
@@ -190,6 +261,11 @@ public class UserController {
 	
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/verifyOrderByOrderId/{orderId}")
 	public String verifyOrders(@PathVariable @Valid String orderId) {
@@ -198,6 +274,11 @@ public class UserController {
 	}
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PreAuthorize("hasRole('ROLE_DOCTOR')")
 	@PostMapping("/placeOrder")
 	public Orders placeOrder(@RequestBody @Valid Orders order) {
@@ -206,6 +287,11 @@ public class UserController {
 	}
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/viewNewOrders")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public Orders[] viewNewOrders(){
@@ -213,6 +299,11 @@ public class UserController {
 	}
 	
 	//done
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	 @PostMapping("/authenticate")
 	    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
 	        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
@@ -226,12 +317,22 @@ public class UserController {
 	    }
 	 
 	 //done
+		/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	 @GetMapping("/searchDrugByName/{drugName}")
 	 public Drugs searchDrugsByName(@PathVariable String drugName) {
 		 return restTemplate.getForObject("http://SUPPLIER-SERVICE/drugs/viewDrugByName/"+drugName,Drugs.class);
 	 }
 	 
 	 //pending
+		/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	 @GetMapping("viewMyOrders")
 	 public List<Orders> viewMyOrders(){
 		 return null;

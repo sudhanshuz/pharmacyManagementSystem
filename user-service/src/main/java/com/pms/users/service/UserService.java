@@ -26,8 +26,11 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public User getUserByUserId(long userId) throws ResourceNotFoundException {
-		User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("invalid user Id"));
+	public Optional<User> getUserByUserId(long userId) throws ResourceNotFoundException {
+		Optional<User> user=userRepository.findById(userId);
+		if(user.isEmpty()) {
+			throw new ResourceNotFoundException("invalid user Id");
+		}
 		return user;
 	}
 

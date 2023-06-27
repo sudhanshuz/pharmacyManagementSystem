@@ -32,46 +32,85 @@ public class supplyController {
 	private RestTemplate restTemplate;
 	
 	Logger logger=LoggerFactory.getLogger(supplyController.class);
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/getAll")
 	public List<Supplier> getSuppliers() {
 		return serviceObj.viewSuppliers();
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PostMapping("/add")
 	public Supplier addSuppliers(@RequestBody @Valid Supplier supplier) {
 		return serviceObj.insertSuppliers(supplier);
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PutMapping("/load")
 	public Supplier loadStock(@RequestParam int id,@RequestParam String drugName,@RequestParam int qty) throws ResourceNotFoundException{
 		return serviceObj.addStock(id,drugName,qty);
 	}
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/setPickupDate/{orderId}")
 	public Date setPickupDate(@PathVariable String orderId) {
 		//verify order if everything is ok set pickup date
 	    return new Date(new Date().getTime() + (86400000*2));
 	}
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@DeleteMapping("/delete/{supplierId}")
 	public Supplier deleteSupplier(@PathVariable String supplierId ) throws ResourceNotFoundException {
 		int id=Integer.parseInt(supplierId);
 		return serviceObj.deleteSupplier(id );
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PutMapping("/edit")
 	public Supplier editSupplier(@RequestBody Supplier supplier) {
 		return serviceObj.editSupplier(supplier);
 	}
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/viewAvailableOrders")
 	public Orders[] viewAvailableOrders() {
 		return serviceObj.serviceObj();
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PutMapping("/pickUpOrder/{orderId}/{supplierId}")
 	public String pickUpOrder(@PathVariable String orderId,@PathVariable String supplierId) {
 		return serviceObj.pickUpOrder(Long.parseLong(orderId),Integer.parseInt(supplierId));
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/findMyOrders/{supplierId}")
 	public List<Orders> findMyOrders(@PathVariable String supplierId) {
 		return serviceObj.findMyOrders(Integer.parseInt(supplierId));

@@ -85,6 +85,30 @@ public class User {
 		this.name = name;
 		this.password = password;
 	}
+	public User(long userId, @NotEmpty(message = "username should'nt be blank") String name,
+			@Pattern(regexp = "^\\d{10}$", message = "invalid mobile number entered ") String contact,
+			@Email(message = "invalid email address") String email,
+			@NotEmpty(message = "password should'nt be blank") String password) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.contact = contact;
+		this.email = email;
+		this.password = password;
+	}
+	public User(long userId, @NotEmpty(message = "username should'nt be blank") String name,
+			@Pattern(regexp = "^\\d{10}$", message = "invalid mobile number entered ") String contact,
+			@Email(message = "invalid email address") String email,
+			@NotEmpty(message = "password should'nt be blank") String password, String role) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.contact = contact;
+		this.email = email;
+		this.password = password;
+		this.role = role;
+	}
+	
 	
 	
 }

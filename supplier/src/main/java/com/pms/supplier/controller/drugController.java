@@ -23,29 +23,56 @@ import com.pms.supplier.service.SupplyService;
 public class drugController {
 	@Autowired
 	private SupplyService serviceObj;
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/getAll")
 	public List<Drugs> viewDrugs(){
 		return serviceObj.getDrugs();
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PostMapping("/add")
 	public Drugs addDrugs(@RequestBody @Valid Drugs drug) {
 		return serviceObj.insertDrug(drug);
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/viewDrugByName/{name}")
 	public Drugs viewDrugByName(@PathVariable String name) throws ResourceNotFoundException {
 		return serviceObj.viewDrugByName(name);
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@GetMapping("/getDrugPrice/{drugName}")
 	public double getDrugPrice(@PathVariable String drugName) throws ResourceNotFoundException {
 		return serviceObj.getDrugPrice(drugName);
 	}
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@DeleteMapping("/deleteDrugByName/{drugName}")
 	public Drugs deleteDrugs(@PathVariable String drugName) throws ResourceNotFoundException {
 		return serviceObj.deleteDrugs( drugName);
 	}
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:
+	 */
 	@PutMapping("/edit")
 	public Drugs editDrugs(@RequestBody Drugs drug) {
 		return serviceObj.editDrugs(drug);
