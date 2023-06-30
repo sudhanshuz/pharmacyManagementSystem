@@ -26,7 +26,7 @@ public class UserService {
 		return userRepository.findAll();
 	}
 
-	public Optional<User> getUserByUserId(long userId) throws ResourceNotFoundException {
+	public Optional<User> getUserByUserId(int userId) throws ResourceNotFoundException {
 		Optional<User> user=userRepository.findById(userId);
 		if(user.isEmpty()) {
 			throw new ResourceNotFoundException("invalid user Id");
@@ -35,10 +35,11 @@ public class UserService {
 	}
 
 	public User editUser(User user) {
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 
-	public User deleteUserById(long userId) throws ResourceNotFoundException {
+	public User deleteUserById(int userId) throws ResourceNotFoundException {
 		User user=userRepository.findById(userId).orElseThrow(()->new ResourceNotFoundException("invalid user Id"));
 		userRepository.deleteById(userId);
 		return user;

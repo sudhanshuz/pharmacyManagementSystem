@@ -1,5 +1,6 @@
 package com.pms.users.controller;
 
+import java.security.Principal;
 import java.util.List;
 
 import java.util.Optional;
@@ -7,11 +8,14 @@ import java.util.Optional;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,9 +29,11 @@ import org.springframework.web.client.RestTemplate;
 import com.pms.users.exceptions.ResourceNotFoundException;
 import com.pms.users.model.AuthRequest;
 import com.pms.users.model.Drugs;
+import com.pms.users.model.JwtResponse;
 import com.pms.users.model.Orders;
 import com.pms.users.model.Supplier;
 import com.pms.users.model.User;
+import com.pms.users.repository.UserRepository;
 import com.pms.users.service.JwtService;
 import com.pms.users.service.MasterService;
 import com.pms.users.service.SequenceGeneratorService;
@@ -36,14 +42,15 @@ import com.pms.users.service.UserService;
 import jakarta.validation.Valid;
 @RestController
 @RequestMapping("/user")
+@CrossOrigin("*")
 public class UserController {
 	@Autowired
 	private UserService userService;
 	
 	@Autowired
 	private SequenceGeneratorService sequenceGeneratorService;
-
-	
+	@Autowired
+	private UserRepository userRepo;
 	@Autowired
 	private MasterService masterService;
 
@@ -90,7 +97,7 @@ public class UserController {
 	@GetMapping("/getUserById/{userId}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public Optional<User> getUserByUserId(@PathVariable String userId) throws NumberFormatException, ResourceNotFoundException {
-		return userService.getUserByUserId(Long.parseLong(userId));
+		return userService.getUserByUserId(Integer.parseInt(userId));
 	}
 	
 	//done
@@ -114,7 +121,7 @@ public class UserController {
 	@DeleteMapping("deleteById/{userId}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public User deleteUserById(@PathVariable String userId) throws NumberFormatException, ResourceNotFoundException {
-		return userService.deleteUserById(Long.parseLong(userId));
+		return userService.deleteUserById(Integer.parseInt(userId));
 	}
 	
 	//done
@@ -305,10 +312,11 @@ public class UserController {
 	  description:
 	 */
 	 @PostMapping("/authenticate")
-	    public String authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
+	    public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
 	        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword()));
 	        if (authentication.isAuthenticated()) {
-	            return jwtService.generateToken(authRequest.getUsername());
+	            String token= jwtService.generateToken(authRequest.getUsername());
+	            return ResponseEntity.ok(new JwtResponse(token));
 	        } else {
 	            throw new UsernameNotFoundException("invalid user request !");
 	        }
@@ -336,5 +344,11 @@ public class UserController {
 	 @GetMapping("viewMyOrders")
 	 public List<Orders> viewMyOrders(){
 		 return null;
+	 }
+	 
+	 @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
+	 @GetMapping("/currentUser")
+	 public Optional<User> getCurrentUser(Principal principal) {
+		 return userRepo.findByName(principal.getName());
 	 }
 }

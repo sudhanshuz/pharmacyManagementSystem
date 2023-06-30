@@ -19,7 +19,7 @@ public class SequenceGeneratorService {
 	@Autowired
     private MongoOperations mongoOperations;
 
-    public long generateSequence(String seqName) {
+    public int generateSequence(String seqName) {
         Query query = new Query(Criteria.where("id").is(seqName));
         Update update = new Update().inc("seq", 1);
         FindAndModifyOptions options = options().returnNew(true).upsert(true);

@@ -23,6 +23,7 @@ public class Orders {
 	@Id
 	private Long orderId;//auto added
 	@NotEmpty(message="name cannot be blank")
+	//(doctors username)
 	private String docName;
 	@Pattern(regexp = "^\\d{10}$",message = "invalid mobile number entered ")
 	private String docContact;
@@ -35,6 +36,7 @@ public class Orders {
 	private boolean pickedUp=false;
 	
 	private int supplierId;
+	
 	
 	
 }

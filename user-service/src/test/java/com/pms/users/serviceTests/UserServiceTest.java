@@ -38,7 +38,7 @@ private void setup() {
 public void getUserByUserIdTest() throws ResourceNotFoundException {
 	Optional<User> user=Optional.of(new User(1,"sp","7350593612","sp@gmail.com","pass","ROLE_DOCTOR"));
 	
-	Mockito.when(userRepository.findById((long) 1)).thenReturn(user);
+	Mockito.when(userRepository.findById(1)).thenReturn(user);
 	assertEquals(user,userService.getUserByUserId(1));
 }
 
@@ -46,7 +46,7 @@ public void getUserByUserIdTest() throws ResourceNotFoundException {
 public void getUserByUserIdwhenIdisInvalid() throws ResourceNotFoundException {
 	Optional<User> user=Optional.of(new User(2,"sp","7350593612","sp@gmail.com","pass","ROLE_DOCTOR"));
 	
-	Mockito.when(userRepository.findById((long) 2)).thenReturn(user);
+	Mockito.when(userRepository.findById(2)).thenReturn(user);
 	Exception e= new ResourceNotFoundException("invalid user Id");
 	assertEquals(e.getMessage(),userService.getUserByUserId(1));
 }

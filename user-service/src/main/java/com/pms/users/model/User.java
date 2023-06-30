@@ -13,9 +13,12 @@ public class User {
 	@Transient
 	public static final String SEQUENCE_NAME="users_sequence";
 	@Id
-	private long userId;
+	private int userId;
 	@NotEmpty(message="username should'nt be blank")
+	//name is username here
 	private String name;
+	@NotEmpty(message="name should'nt be blank")
+	private String fullName;
 	@Pattern(regexp = "^\\d{10}$",message = "invalid mobile number entered ")
 	private String contact;
 	@Email(message="invalid email address")
@@ -30,10 +33,22 @@ public class User {
 		this.email = email;
 		this.password = password;
 	}
+	
+	
+	public String getFullName() {
+		return fullName;
+	}
+
+
+	public void setFullName(String fullName) {
+		this.fullName = fullName;
+	}
+
+
 	public long getUserId() {
 		return userId;
 	}
-	public void setUserId(long userId) {
+	public void setUserId(int userId) {
 		this.userId = userId;
 	}
 	public String getName() {
@@ -85,29 +100,48 @@ public class User {
 		this.name = name;
 		this.password = password;
 	}
-	public User(long userId, @NotEmpty(message = "username should'nt be blank") String name,
-			@Pattern(regexp = "^\\d{10}$", message = "invalid mobile number entered ") String contact,
-			@Email(message = "invalid email address") String email,
-			@NotEmpty(message = "password should'nt be blank") String password) {
-		super();
-		this.userId = userId;
-		this.name = name;
-		this.contact = contact;
-		this.email = email;
-		this.password = password;
-	}
-	public User(long userId, @NotEmpty(message = "username should'nt be blank") String name,
+
+	public User(int userId, @NotEmpty(message = "username should'nt be blank") String name,
+			@NotEmpty(message = "name should'nt be blank") String fullName,
 			@Pattern(regexp = "^\\d{10}$", message = "invalid mobile number entered ") String contact,
 			@Email(message = "invalid email address") String email,
 			@NotEmpty(message = "password should'nt be blank") String password, String role) {
 		super();
 		this.userId = userId;
 		this.name = name;
+		this.fullName = fullName;
 		this.contact = contact;
 		this.email = email;
 		this.password = password;
-		this.role = role;
 	}
+
+
+	public User(int userId, @NotEmpty(message = "username should'nt be blank") String name,
+			@NotEmpty(message = "name should'nt be blank") String fullName,
+			@Pattern(regexp = "^\\d{10}$", message = "invalid mobile number entered ") String contact,
+			@Email(message = "invalid email address") String email,
+			@NotEmpty(message = "password should'nt be blank") String password) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.fullName = fullName;
+		this.contact = contact;
+		this.email = email;
+		this.password = password;
+	}
+
+	public User(int userId, @NotEmpty(message = "username should'nt be blank") String name,
+			@NotEmpty(message = "name should'nt be blank") String fullName,
+			@Pattern(regexp = "^\\d{10}$", message = "invalid mobile number entered ") String contact,
+			@Email(message = "invalid email address") String email) {
+		super();
+		this.userId = userId;
+		this.name = name;
+		this.fullName = fullName;
+		this.contact = contact;
+		this.email = email;
+	}
+
 	
 	
 	
