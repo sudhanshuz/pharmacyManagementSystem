@@ -1,5 +1,8 @@
 package com.pms.users.model;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class JwtResponse {
 String token;
 

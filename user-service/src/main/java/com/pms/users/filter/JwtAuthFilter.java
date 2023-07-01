@@ -20,7 +20,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @Service
-@CrossOrigin("*")
 public class JwtAuthFilter extends OncePerRequestFilter {
 	
 	@Autowired

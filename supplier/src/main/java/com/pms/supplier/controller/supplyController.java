@@ -39,6 +39,8 @@ public class supplyController {
 	 */
 	@GetMapping("/getAll")
 	public List<Supplier> getSuppliers() {
+		logger.debug("if list is null");
+		logger.info("executed");
 		return serviceObj.viewSuppliers();
 	}
 	/* Author: Sudhanshu

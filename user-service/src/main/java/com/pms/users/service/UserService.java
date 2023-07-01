@@ -17,8 +17,12 @@ public class UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
-	public User saveUser(User user) {
+	public User saveUser(User user) throws ResourceNotFoundException {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
+		User local=userRepository.findByName(user.getName()).orElse(null);
+		if(local!=null) {
+			throw new ResourceNotFoundException("username already exists");
+		}
 		return userRepository.insert(user);
 	}
 
