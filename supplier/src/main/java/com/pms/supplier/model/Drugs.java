@@ -72,6 +72,11 @@ public boolean equals(Object obj) {
 			&& Objects.equals(exp_date, other.exp_date)
 			&& Double.doubleToLongBits(price) == Double.doubleToLongBits(other.price);
 }
+@Override
+public String toString() {
+	return "Drugs [drugName=" + drugName + ", price=" + price + ", exp_date=" + exp_date + ", batchId=" + batchId + "]";
+}
+
 
 
 }

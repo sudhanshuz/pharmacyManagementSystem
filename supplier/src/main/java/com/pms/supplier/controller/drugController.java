@@ -4,7 +4,10 @@ import java.util.List;
 
 import javax.validation.Valid;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,7 +23,10 @@ import com.pms.supplier.service.SupplyService;
 
 @RestController
 @RequestMapping("/drugs")
+@CrossOrigin("*")
 public class drugController {
+	
+	Logger logger=LoggerFactory.getLogger(drugController.class);
 	@Autowired
 	private SupplyService serviceObj;
 	/* Author: Sudhanshu
@@ -39,6 +45,8 @@ public class drugController {
 	 */
 	@PostMapping("/add")
 	public Drugs addDrugs(@RequestBody @Valid Drugs drug) {
+		logger.info("check");
+		logger.error("what's wrong");
 		return serviceObj.insertDrug(drug);
 	}
 	/* Author: Sudhanshu

@@ -1,0 +1,16 @@
+2023-07-03 18:19:03 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Starting SupplierApplication using Java 17.0.7 on LAPTOP-LAEMEI2E with PID 3764 (C:\Users\HP\git\repository\supplier\target\classes started by HP in C:\Users\HP\git\repository\supplier)
+2023-07-03 18:19:03 [restartedMain] DEBUG com.pms.supplier.SupplierApplication -
+				Running with Spring Boot v2.7.12, Spring v5.3.27
+2023-07-03 18:19:03 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-03 18:19:09 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Started SupplierApplication in 6.269 seconds (JVM running for 7.955)
+2023-07-03 18:26:04 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Starting SupplierApplication using Java 17.0.7 on LAPTOP-LAEMEI2E with PID 3764 (C:\Users\HP\git\repository\supplier\target\classes started by HP in C:\Users\HP\git\repository\supplier)
+2023-07-03 18:26:04 [restartedMain] DEBUG com.pms.supplier.SupplierApplication -
+				Running with Spring Boot v2.7.12, Spring v5.3.27
+2023-07-03 18:26:04 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-03 18:26:06 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Started SupplierApplication in 1.583 seconds (JVM running for 424.931)

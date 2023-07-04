@@ -1,0 +1,62 @@
+2023-07-04 17:41:08 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Started SupplierApplication in 1.666 seconds (JVM running for 15943.473)
+2023-07-04 17:46:51 [http-nio-8000-exec-5] INFO  c.p.s.controller.drugController -
+				check
+2023-07-04 17:46:51 [http-nio-8000-exec-5] ERROR c.p.s.controller.drugController -
+				what's wrong
+2023-07-04 18:00:30 [http-nio-8000-exec-8] INFO  c.p.s.controller.drugController -
+				check
+2023-07-04 18:00:30 [http-nio-8000-exec-8] ERROR c.p.s.controller.drugController -
+				what's wrong
+2023-07-04 18:01:33 [http-nio-8000-exec-10] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 18:01:33 [http-nio-8000-exec-10] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:38:00 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Starting SupplierApplication using Java 17.0.7 on LAPTOP-LAEMEI2E with PID 18860 (C:\Users\HP\git\repository\supplier\target\classes started by HP in C:\Users\HP\git\repository\supplier)
+2023-07-04 20:38:00 [restartedMain] DEBUG com.pms.supplier.SupplierApplication -
+				Running with Spring Boot v2.7.12, Spring v5.3.27
+2023-07-04 20:38:00 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-04 20:38:05 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Started SupplierApplication in 5.969 seconds (JVM running for 7.241)
+2023-07-04 20:41:22 [http-nio-8000-exec-2] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:41:22 [http-nio-8000-exec-2] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:43:10 [http-nio-8000-exec-4] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:43:10 [http-nio-8000-exec-4] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:46:24 [http-nio-8000-exec-6] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:46:24 [http-nio-8000-exec-6] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:47:20 [http-nio-8000-exec-7] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:47:20 [http-nio-8000-exec-7] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:49:47 [http-nio-8000-exec-9] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:49:47 [http-nio-8000-exec-9] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:57:33 [http-nio-8000-exec-1] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:57:33 [http-nio-8000-exec-1] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:58:25 [http-nio-8000-exec-2] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:58:25 [http-nio-8000-exec-2] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 20:58:58 [http-nio-8000-exec-3] DEBUG c.p.s.controller.supplyController -
+				if list is null
+2023-07-04 20:58:58 [http-nio-8000-exec-3] INFO  c.p.s.controller.supplyController -
+				executed
+2023-07-04 23:51:44 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Starting SupplierApplication using Java 17.0.7 on LAPTOP-LAEMEI2E with PID 1336 (C:\Users\HP\git\repository\supplier\target\classes started by HP in C:\Users\HP\git\repository\supplier)
+2023-07-04 23:51:44 [restartedMain] DEBUG com.pms.supplier.SupplierApplication -
+				Running with Spring Boot v2.7.12, Spring v5.3.27
+2023-07-04 23:51:44 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-04 23:51:49 [restartedMain] INFO  com.pms.supplier.SupplierApplication -
+				Started SupplierApplication in 5.419 seconds (JVM running for 6.425)
