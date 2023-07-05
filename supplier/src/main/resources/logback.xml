@@ -56,15 +56,16 @@
 
 	</appender>
 
-	Send logs to both console and file audit
+	<!--  Send logs to both console and file audit-->
 	<logger name="com.pms.supplier" level="debug"
 		additivity="false">
 		<appender-ref ref="FILE-DEBUG" />
-		<appender-ref ref="STDOUT" />
+	<appender-ref ref="STDOUT" />
 	</logger>
 
 	<root level="error">
 		<appender-ref ref="FILE-ERROR" />
+		<appender-ref ref="STDOUT" />
 	</root>
 
 </configuration>

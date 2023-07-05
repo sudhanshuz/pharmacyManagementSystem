@@ -1,6 +1,7 @@
 package com.pms.supplier.controller;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import javax.validation.Valid;
 
@@ -22,6 +23,7 @@ import org.springframework.web.client.RestTemplate;
 import com.pms.supplier.exception.ResourceNotFoundException;
 import com.pms.supplier.model.Orders;
 import com.pms.supplier.model.Supplier;
+import com.pms.supplier.repository.SupplierRepository;
 import com.pms.supplier.service.SupplyService;
 
 @RestController
@@ -32,6 +34,9 @@ public class supplyController {
 	private SupplyService serviceObj;
 	@Autowired
 	private RestTemplate restTemplate;
+	
+	@Autowired
+	private SupplierRepository supplyRepository;
 	
 	Logger logger=LoggerFactory.getLogger(supplyController.class);
 	/* Author: Sudhanshu
@@ -118,5 +123,14 @@ public class supplyController {
 	@GetMapping("/findMyOrders/{supplierId}")
 	public List<Orders> findMyOrders(@PathVariable String supplierId) {
 		return serviceObj.findMyOrders(Integer.parseInt(supplierId));
+	}
+	@GetMapping("/viewSupplierByName/{supplierName}")
+	public Supplier viewSupplierByName(@PathVariable String supplierName) {
+		return supplyRepository.findBySupplierName(supplierName);
+	}
+	
+	@GetMapping("/viewSupplierById/{supplierId}")
+	public Optional<Supplier> viewSupplierById(@PathVariable String supplierId) {
+		return supplyRepository.findById(Integer.parseInt(supplierId));
 	}
 }
