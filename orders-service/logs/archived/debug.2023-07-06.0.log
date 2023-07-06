@@ -1,0 +1,60 @@
+2023-07-06 00:32:08 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 15268 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-06 00:32:08 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-06 00:32:08 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-06 00:32:14 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 6.679 seconds (process running for 8.073)
+2023-07-06 17:20:31 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 24248 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-06 17:20:31 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-06 17:20:31 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-06 17:20:36 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 6.114 seconds (process running for 7.429)
+2023-07-06 20:53:43 [http-nio-8001-exec-2] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 20:58:18 [http-nio-8001-exec-3] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 20:59:53 [http-nio-8001-exec-5] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:25:55 [http-nio-8001-exec-7] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:28:19 [http-nio-8001-exec-9] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:31:10 [http-nio-8001-exec-2] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:34:02 [http-nio-8001-exec-3] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:38:49 [http-nio-8001-exec-5] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:43:14 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 24248 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-06 23:43:14 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-06 23:43:14 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-06 23:43:16 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 2.069 seconds (process running for 22966.997)
+2023-07-06 23:44:05 [http-nio-8001-exec-2] INFO  c.p.o.controller.OrdersController -
+				added
+2023-07-06 23:45:54 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 24248 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-06 23:45:54 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-06 23:45:54 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-06 23:45:55 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 1.577 seconds (process running for 23126.733)
+2023-07-06 23:47:10 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 24248 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-06 23:47:10 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-06 23:47:10 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-06 23:47:11 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 1.496 seconds (process running for 23202.306)
+2023-07-06 23:48:59 [http-nio-8001-exec-1] INFO  c.p.o.controller.OrdersController -
+				added

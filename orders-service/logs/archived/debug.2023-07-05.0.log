@@ -1,0 +1,16 @@
+2023-07-05 13:12:33 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 5900 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-05 13:12:33 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-05 13:12:33 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-05 13:12:39 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 7.074 seconds (process running for 8.42)
+2023-07-05 20:57:11 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Starting OrdersServiceApplication using Java 17.0.7 with PID 12796 (C:\Users\HP\git\repository\orders-service\target\classes started by HP in C:\Users\HP\git\repository\orders-service)
+2023-07-05 20:57:11 [restartedMain] DEBUG c.p.orders.OrdersServiceApplication -
+				Running with Spring Boot v3.1.0, Spring v6.0.9
+2023-07-05 20:57:11 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				No active profile set, falling back to 1 default profile: "default"
+2023-07-05 20:57:16 [restartedMain] INFO  c.p.orders.OrdersServiceApplication -
+				Started OrdersServiceApplication in 5.976 seconds (process running for 7.213)

@@ -22,20 +22,30 @@ import lombok.ToString;
 public class Orders {
 	@Id
 	private Long orderId;//auto added
-	@NotEmpty(message="name cannot be blank")
-	//(doctors username)
+	@NotEmpty(message="cannot be blank")
 	private String docName;
-	@Pattern(regexp = "^\\d{10}$",message = "invalid mobile number entered ")
-	private String docContact;
-	@Email(message="invalid email")
+	@NotEmpty(message="cannot be blank")
+	private long docContact;
+	@NotEmpty(message="cannot be blank")
 	private String docEmail;
 	private double total; //auto added
 	private Date pickupDate;//auto added
-	private HashMap<String,Integer> drugInfo;
+	@NotEmpty(message="cannot be blank")
+	private String drugName;
+	private int qty;
 	private boolean verified=false;
 	private boolean pickedUp=false;
-	
 	private int supplierId;
+	public Orders(@NotEmpty(message = "cannot be blank") String docName,
+			@NotEmpty(message = "cannot be blank") long docContact,
+			@NotEmpty(message = "cannot be blank") String docEmail, String drugName, int qty) {
+		super();
+		this.docName = docName;
+		this.docContact = docContact;
+		this.docEmail = docEmail;
+		this.drugName = drugName;
+		this.qty = qty;
+	}
 	
 	
 	

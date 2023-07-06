@@ -39,21 +39,15 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 	@Autowired
 	RestTemplate restTemplate;
 	public Orders addOrder(Orders order) {
-		HashMap<String,Integer> drugInfo=order.getDrugInfo();
 		double total=0;
-        Iterator<Map.Entry<String, Integer>> itr = drugInfo.entrySet().iterator();
-        
-        while(itr.hasNext())
-        {
-             Map.Entry<String, Integer> entry = itr.next();
-             String drugName=entry.getKey();
-             int qty=entry.getValue();
+             String drugName=order.getDrugName();
+             int qty=order.getQty();
+             System.out.println(order);
      		double price=restTemplate.getForObject("http://SUPPLIER-SERVICE/drugs/getDrugPrice/"+drugName,Double.class);
      		total=total+(price*qty);
-        }
         order.setTotal(total);
 		
-		NewOrders vObj=new NewOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo());
+		NewOrders vObj=new NewOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugName(),order.getQty());
 		newOrdersRepo.insert(vObj);
         
 	return orderRepository.insert(order);	
@@ -102,7 +96,7 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 
 	public VerifiedOrders addVerifiedOrders(Orders order) {
 		
-		VerifiedOrders vObj=new VerifiedOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo(),true,false);
+		VerifiedOrders vObj=new VerifiedOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugName(),order.getQty(),true,false);
 		verifiedOrderRepo.save(vObj);
 		orderRepository.save(order);
 		newOrdersRepo.deleteById(vObj.getOrderId());
@@ -111,7 +105,7 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 
 	public Orders addPickedUpOrders(Orders order) {
 		// TODO Auto-generated method stub
-			PickedUpOrders pObj=new PickedUpOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugInfo(),order.isVerified(),order.isPickedUp());
+			PickedUpOrders pObj=new PickedUpOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugName(),order.getQty(),order.isVerified(),order.isPickedUp());
 			pObj.setSupplierId(order.getSupplierId());
 			pickedUpOrdersRepo.save(pObj);
 			verifiedOrderRepo.deleteById(order.getOrderId());

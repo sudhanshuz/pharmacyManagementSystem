@@ -10,9 +10,15 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
 import jakarta.validation.constraints.NotEmpty;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Document(collection="Orders")
 @Component
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Orders {
 
 	@Transient
@@ -27,10 +33,22 @@ public class Orders {
 	private String docEmail;
 	private double total; //auto added
 	private Date pickupDate;//auto added
-	private HashMap<String,Integer> drugInfo;
+	@NotEmpty(message="cannot be blank")
+	private String drugName;
+	private int qty;
 	private boolean verified=false;
 	private boolean pickedUp=false;
 	private int supplierId;
+	public Orders(@NotEmpty(message = "cannot be blank") String docName,
+			@NotEmpty(message = "cannot be blank") long docContact,
+			@NotEmpty(message = "cannot be blank") String docEmail, String drugName, int qty) {
+		super();
+		this.docName = docName;
+		this.docContact = docContact;
+		this.docEmail = docEmail;
+		this.drugName = drugName;
+		this.qty = qty;
+	}
 	
 	
 	
@@ -38,112 +56,7 @@ public class Orders {
 	
 	
 	
-	public int getSupplierId() {
-		return supplierId;
-	}
-	public void setSupplierId(int supplierId) {
-		this.supplierId = supplierId;
-	}
-	public Orders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
-			@NotEmpty(message = "cannot be blank") long docContact,
-			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate,
-			HashMap<String, Integer> drugInfo, boolean verified, boolean pickedUp) {
-		super();
-		this.orderId = orderId;
-		this.docName = docName;
-		this.docContact = docContact;
-		this.docEmail = docEmail;
-		this.total = total;
-		this.pickupDate = pickupDate;
-		this.drugInfo = drugInfo;
-		this.verified = verified;
-		this.pickedUp = pickedUp;
-	}
-	public boolean isVerified() {
-		return verified;
-	}
-	public Orders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
-			@NotEmpty(message = "cannot be blank") long docContact,
-			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate,
-			HashMap<String, Integer> drugInfo) {
-		super();
-		this.orderId = orderId;
-		this.docName = docName;
-		this.docContact = docContact;
-		this.docEmail = docEmail;
-		this.total = total;
-		this.pickupDate = pickupDate;
-		this.drugInfo = drugInfo;
-	}
-	public void setVerified(boolean verified) {
-		this.verified = verified;
-	}
-	public boolean isPickedUp() {
-		return pickedUp;
-	}
-	public void setPickedUp(boolean pickedUp) {
-		this.pickedUp = pickedUp;
-	}
 	
-	public HashMap<String, Integer> getDrugInfo() {
-		return drugInfo;
-	}
-	public void setDrugInfo(HashMap<String, Integer> drugInfo) {
-		this.drugInfo = drugInfo;
-	}
-	public String getDocEmail() {
-		return docEmail;
-	}
-	public void setDocEmail(String docEmail) {
-		this.docEmail = docEmail;
-	}
-	public double getTotal() {
-		return total;
-	}
-	public void setTotal(double total) {
-		this.total = total;
-	}
-	public Date getPickupDate() {
-		return pickupDate;
-	}
-	public void setPickupDate(Date pickupDate) {
-		this.pickupDate = pickupDate;
-	}
-	public Long getOrderId() {
-		return orderId;
-	}
-	public void setOrderId(Long orderId) {
-		this.orderId = orderId;
-	}
-	public String getDocName() {
-		return docName;
-	}
-	public void setDocName(String docName) {
-		this.docName = docName;
-	}
-	public long getDocContact() {
-		return docContact;
-	}
-	public void setDocContact(long docContact) {
-		this.docContact = docContact;
-	}
-	public Orders(Long orderId, String docName, long docContact) {
-		super();
-		this.orderId = orderId;
-		this.docName = docName;
-		this.docContact = docContact;
-	}
-	
-	public Orders(String docName, long docContact, String docEmail, HashMap<String, Integer> drugInfo) {
-		super();
-		this.docName = docName;
-		this.docContact = docContact;
-		this.docEmail = docEmail;
-		this.drugInfo = drugInfo;
-	}
-	public Orders() {
-		super();
-	}
 	
 	
 }

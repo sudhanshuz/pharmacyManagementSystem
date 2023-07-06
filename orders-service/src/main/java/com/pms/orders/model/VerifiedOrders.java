@@ -26,13 +26,15 @@ public class VerifiedOrders {
 	private String docEmail;
 	private double total; //auto added
 	private Date pickupDate;//auto added
-	private HashMap<String,Integer> drugInfo;
+	private String drugName;
+	private int qty;
 	private boolean verified=false;
 	private boolean pickedUp=false;
+	private int supplierId;
 	public VerifiedOrders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
 			@NotEmpty(message = "cannot be blank") long docContact,
-			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate,
-			HashMap<String, Integer> drugInfo) {
+			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate, String drugName,
+			int qty, boolean verified, boolean pickedUp) {
 		super();
 		this.orderId = orderId;
 		this.docName = docName;
@@ -40,6 +42,9 @@ public class VerifiedOrders {
 		this.docEmail = docEmail;
 		this.total = total;
 		this.pickupDate = pickupDate;
-		this.drugInfo = drugInfo;
+		this.drugName = drugName;
+		this.qty = qty;
+		this.verified = verified;
+		this.pickedUp = pickedUp;
 	}
 }
