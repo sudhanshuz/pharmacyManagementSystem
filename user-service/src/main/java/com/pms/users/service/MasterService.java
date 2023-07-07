@@ -118,16 +118,16 @@ public class MasterService {
 		return orderUpdated;
 	}
 
-	public String verifyOrders(long orderId) {
+	public Orders verifyOrders(long orderId) {
 		Orders order=restTemplate.getForObject("http://ORDERS-SERVICE/orders/getOrdersById/"+orderId,Orders.class);
 		order.setVerified(true);
 		System.out.println(order);
 		HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);
         HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
-        restTemplate.postForObject("http://ORDERS-SERVICE/orders/addVerifiedOrders",requestEntity, Orders.class);
+        Orders orderUpdated=restTemplate.postForObject("http://ORDERS-SERVICE/orders/addVerifiedOrders",requestEntity, Orders.class);
 		
-		return  "order verified successfully";
+		return  orderUpdated;
 	}
 
 

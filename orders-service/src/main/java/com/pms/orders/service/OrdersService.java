@@ -49,7 +49,7 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 		
 		NewOrders vObj=new NewOrders(order.getOrderId(),order.getDocName(),order.getDocContact(),order.getDocEmail(),order.getTotal(),order.getPickupDate(),order.getDrugName(),order.getQty());
 		newOrdersRepo.insert(vObj);
-        
+		
 	return orderRepository.insert(order);	
 	}
 

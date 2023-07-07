@@ -276,9 +276,9 @@ public class UserController {
 	  Modified Time:
 	  description:
 	 */
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/verifyOrderByOrderId/{orderId}")
-	public String verifyOrders(@PathVariable @Valid String orderId) {
+	public Orders verifyOrders(@PathVariable @Valid String orderId) {
 		
 		return masterService.verifyOrders(Long.parseLong(orderId));
 	}
