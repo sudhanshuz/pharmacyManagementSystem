@@ -1,10 +1,11 @@
 package com.pms.report.model;
 
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
@@ -18,12 +19,11 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Sales {
 	@Id
-	@Column(name="ID")
-private int id;	
+	private int salesId;
 	@Column(name="drugNames")
 private List<String> drugName;
 	@Column(name="dateAndTime")
-private Date dateAndTime;
+private String dateAndTime;
 	@Column(name="totalAmt")
 private double totalAmt;
 	@Column(name="paidAmt")

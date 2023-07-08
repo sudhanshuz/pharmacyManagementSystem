@@ -73,7 +73,7 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 		if(order==null) {
 			throw new ResourceNotFoundException("invalid order id");
 		}
-		Date pickupDate=restTemplate.getForObject("http//SUPPLIER-SERVICE/setPickupDate/"+orderId,Date.class);
+		String pickupDate=restTemplate.getForObject("http//SUPPLIER-SERVICE/setPickupDate/"+orderId,String.class);
 		order.setPickupDate(pickupDate);
 		return orderRepository.save(order);
 	}
@@ -124,6 +124,12 @@ PickedUpOrdersRepo pickedUpOrdersRepo;
 	public List<PickedUpOrders> getMyOrdersByDocName(String docName) {
 		// TODO Auto-generated method stub
 		return pickedUpOrdersRepo.findByDocName(docName);
+	}
+
+	public List<PickedUpOrders> getOrdersByPickUpDate(String pickUpDate) {
+		// TODO Auto-generated method stub
+		System.out.println(pickedUpOrdersRepo.findByPickUpDate(pickUpDate));
+		return pickedUpOrdersRepo.findByPickUpDate(pickUpDate);
 	}
 
 	

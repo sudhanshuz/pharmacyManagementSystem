@@ -13,7 +13,10 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 public class SupplierApplication {
 
+	
+	
 	public static void main(String[] args) {
+
 		SpringApplication.run(SupplierApplication.class, args);
 	}
 	@Bean
@@ -21,5 +24,8 @@ public class SupplierApplication {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+	
+	
+	
 
 }

@@ -14,4 +14,7 @@ public interface PickedUpOrdersRepo extends MongoRepository<PickedUpOrders,Long>
 
 	@Query("{ 'docName' : ?0 }")
     List<PickedUpOrders> findByDocName(String docName);
+	
+	@Query("{ 'pickupDate' : ?0 }")
+    List<PickedUpOrders> findByPickUpDate(String pickupDate);
 }

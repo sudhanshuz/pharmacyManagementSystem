@@ -1,4 +1,5 @@
 package com.pms.supplier.controller;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.Optional;
@@ -74,9 +75,11 @@ public class supplyController {
 	  description:
 	 */
 	@GetMapping("/setPickupDate/{orderId}")
-	public Date setPickupDate(@PathVariable String orderId) {
+	public String setPickupDate(@PathVariable String orderId) {
 		//verify order if everything is ok set pickup date
-	    return new Date(new Date().getTime() + (86400000*2));
+		Date date=new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+	    return dateFormat.format(date);
 	}
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu

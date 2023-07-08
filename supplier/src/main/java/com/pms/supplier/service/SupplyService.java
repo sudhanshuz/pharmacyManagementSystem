@@ -1,6 +1,7 @@
 package com.pms.supplier.service;
 
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -109,7 +110,9 @@ public class SupplyService {
 		for(Orders order:orders) {
 			if(order.getOrderId()==orderId) {
 				order.setPickedUp(true);
-				order.setPickupDate(new Date());
+				Date date=new Date();
+				SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy");
+				order.setPickupDate(dateFormat.format(date));
 				order.setSupplierId(supplierId);
 				HttpHeaders headers = new HttpHeaders();
 		        headers.setContentType(MediaType.APPLICATION_JSON);

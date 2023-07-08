@@ -1,7 +1,6 @@
 package com.pms.orders.model;
 
 import java.util.Date;
-import java.util.HashMap;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -26,7 +25,7 @@ public class NewOrders {
 	@NotEmpty(message="cannot be blank")
 	private String docEmail;
 	private double total; //auto added
-	private Date pickupDate;//auto added
+	private String pickupDate;//auto added
 	private String drugName;
 	private int qty;
 	private boolean verified=false;
@@ -34,7 +33,7 @@ public class NewOrders {
 	private int supplierId;
 	public NewOrders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
 			@NotEmpty(message = "cannot be blank") long docContact,
-			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate, String drugName,
+			@NotEmpty(message = "cannot be blank") String docEmail, double total, String pickupDate, String drugName,
 			int qty, boolean verified) {
 		super();
 		this.orderId = orderId;
@@ -49,7 +48,7 @@ public class NewOrders {
 	}
 	public NewOrders(Long orderId, @NotEmpty(message = "cannot be blank") String docName,
 			@NotEmpty(message = "cannot be blank") long docContact,
-			@NotEmpty(message = "cannot be blank") String docEmail, double total, Date pickupDate, String drugName,
+			@NotEmpty(message = "cannot be blank") String docEmail, double total, String pickupDate, String drugName,
 			int qty) {
 		super();
 		this.orderId = orderId;

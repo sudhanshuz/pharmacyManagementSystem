@@ -9,6 +9,8 @@ import org.springframework.data.annotation.Transient;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.stereotype.Component;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -32,7 +34,8 @@ public class Orders {
 	@NotEmpty(message="cannot be blank")
 	private String docEmail;
 	private double total; //auto added
-	private Date pickupDate;//auto added
+	//@JsonFormat(shape=JsonFormat.Shape.STRING, pattern="dd-MM-yyyy")
+	private String pickupDate;//auto added
 	@NotEmpty(message="cannot be blank")
 	private String drugName;
 	private int qty;
