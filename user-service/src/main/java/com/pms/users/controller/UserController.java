@@ -344,10 +344,7 @@ public class UserController {
 	  Modified Time:
 	  description:
 	 */
-	 @GetMapping("viewMyOrders")
-	 public List<Orders> viewMyOrders(){
-		 return null;
-	 }
+	 
 	 
 	 @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	 @GetMapping("/currentUser")
