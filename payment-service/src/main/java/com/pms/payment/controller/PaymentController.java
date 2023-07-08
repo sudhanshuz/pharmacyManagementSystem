@@ -1,16 +1,12 @@
 package com.pms.payment.controller;
 
 import java.math.BigInteger;
-import java.util.Map;
 
 import org.json.JSONObject;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pms.payment.model.OrderRequest;
@@ -19,7 +15,7 @@ import com.razorpay.Order;
 import com.razorpay.RazorpayClient;
 import com.razorpay.RazorpayException;
 
-@Controller
+@RestController
 @CrossOrigin("*")
 @RequestMapping("/payment")
 public class PaymentController {
@@ -32,7 +28,6 @@ public class PaymentController {
 	@PostMapping("/createOrder")
 	public OrderResponse createOrder(@RequestBody OrderRequest orderRequest) throws RazorpayException {
 		OrderResponse response = new OrderResponse();
-		try {
 			client = new RazorpayClient(SECRET_ID, SECRET_KEY);
 
 			Order order = createRazorPayOrder(orderRequest.getAmount());
@@ -45,11 +40,6 @@ public class PaymentController {
 				response.setSecretKey(SECRET_KEY);
 				response.setSecretId(SECRET_ID);
 				response.setPgName("razor1");
-		}
-				catch (RazorpayException e) {
-					e.printStackTrace();
-				}
-
 			return response;
 	}
 
