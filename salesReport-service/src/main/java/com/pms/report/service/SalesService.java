@@ -27,7 +27,6 @@ public class SalesService {
 	}
 
 	public Sales addReportsByDate(String date) {
-		// TODO Auto-generated method stub
 		PickedUpOrders[] order=restTemplate.getForObject("http://ORDERS-SERVICE/orders/getOrdersByPickUpDate/"+date,PickedUpOrders[].class);
 		Sales sales=new Sales();
 		sales.setDateAndTime(date);
@@ -48,12 +47,10 @@ public class SalesService {
 	}
 
 	public List<Sales> getReports() {
-		// TODO Auto-generated method stub
 		return salesRepo.findAll();
 	}
 
 	public boolean deleteSalesReport(int id) {
-		// TODO Auto-generated method stub
 		salesRepo.deleteById(id);
 		Sales sales=salesRepo.findById(id).orElse(null);
 		if(sales==null) {

@@ -30,8 +30,8 @@ SalesService salesService;
 	}
 	
 	@DeleteMapping("/delete/{id}")
-	public boolean deleteSalesReport(@PathVariable String id) {
-		return salesService.deleteSalesReport(Integer.parseInt(id));
+	public boolean deleteSalesReport(@PathVariable int id) {
+		return salesService.deleteSalesReport(id);
 	}
 	@GetMapping("/addSalesByDate/{date}")
 	public Sales addSales(@PathVariable String date){

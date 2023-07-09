@@ -17,6 +17,10 @@ public class UserService {
 	@Autowired
 	PasswordEncoder passwordEncoder;
 	
+	public UserService(UserRepository userRepository2, PasswordEncoder passwordEncoder2) {
+		// TODO Auto-generated constructor stub
+	}
+
 	public User saveUser(User user) throws ResourceNotFoundException {
 		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		User local=userRepository.findByName(user.getName()).orElse(null);
