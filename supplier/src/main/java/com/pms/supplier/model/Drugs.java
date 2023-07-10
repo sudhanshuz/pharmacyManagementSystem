@@ -6,6 +6,7 @@ import java.util.Objects;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -21,6 +22,10 @@ private double price;
 private Date exp_date;
 @NotEmpty(message="please provide batch id")
 private String batchId;
+@Autowired
+private ImageModel img;
+
+
 public String getDrugName() {
 	return drugName;
 }
@@ -77,6 +82,15 @@ public String toString() {
 	return "Drugs [drugName=" + drugName + ", price=" + price + ", exp_date=" + exp_date + ", batchId=" + batchId + "]";
 }
 
-
+public Drugs(@NotEmpty(message = "please specify drug name") String drugName,
+		@NotNull(message = "pleaase enter price") double price, Date exp_date,
+		@NotEmpty(message = "please provide batch id") String batchId, ImageModel img) {
+	super();
+	this.drugName = drugName;
+	this.price = price;
+	this.exp_date = exp_date;
+	this.batchId = batchId;
+	this.img = img;
+}
 
 }
