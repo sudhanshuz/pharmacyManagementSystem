@@ -108,7 +108,7 @@ public class UserController {
 	  description:
 	 */
 	@PutMapping("/edit")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public User editUser(@RequestBody @Valid User user) {
 		return userService.editUser(user);
 	}
