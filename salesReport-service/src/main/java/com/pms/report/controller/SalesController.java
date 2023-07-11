@@ -23,20 +23,41 @@ public class SalesController {
 	
 @Autowired	
 SalesService salesService;
-
+	
+/* Author: Sudhanshu
+Modified By:Sudhanshu
+Modified Time:
+description: add all the sales reports into the database
+*/
 	@PostMapping("/add")
 	public Sales addSalesReport(@RequestBody Sales sales) {
 		return salesService.addReport(sales);
 	}
-	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: delete the sales report by it's id
+	 */	
 	@DeleteMapping("/delete/{id}")
 	public boolean deleteSalesReport(@PathVariable int id) {
 		return salesService.deleteSalesReport(id);
 	}
+	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: add todays sales reports
+	 */
 	@GetMapping("/addSalesByDate/{date}")
 	public Sales addSales(@PathVariable String date){
 		return salesService.addReportsByDate(date);
 	}
+	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:get all the sales reports
+	 */
 	@GetMapping("/getReports")
 	public List<Sales> getReports() {
 	return salesService.getReports();	

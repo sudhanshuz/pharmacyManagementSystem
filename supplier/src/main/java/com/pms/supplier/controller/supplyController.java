@@ -43,7 +43,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: get all the suppliers from the repository
 	 */
 	@GetMapping("/getAll")
 	public List<Supplier> getSuppliers() {
@@ -53,7 +53,7 @@ public class supplyController {
 	}
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
-	  Modified Time:
+	  Modified Time: add the suppliers into the database
 	  description:
 	 */
 	@PostMapping("/add")
@@ -63,7 +63,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: load stock for the supplier
 	 */
 	@PutMapping("/load")
 	public Supplier loadStock(@RequestParam int id,@RequestParam String drugName,@RequestParam int qty) throws ResourceNotFoundException{
@@ -72,7 +72,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: set Pickup date
 	 */
 	@GetMapping("/setPickupDate/{orderId}")
 	public String setPickupDate(@PathVariable String orderId) {
@@ -84,7 +84,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description:delete the suppliers by supplier id
 	 */
 	@DeleteMapping("/delete/{supplierId}")
 	public Supplier deleteSupplier(@PathVariable String supplierId ) throws ResourceNotFoundException {
@@ -94,7 +94,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: edit the supplier info
 	 */
 	@PutMapping("/edit")
 	public Supplier editSupplier(@RequestBody Supplier supplier) {
@@ -103,7 +103,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: view available orders to suppliers
 	 */
 	@GetMapping("/viewAvailableOrders")
 	public Orders[] viewAvailableOrders() {
@@ -112,7 +112,7 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: pick order from available
 	 */
 	@PutMapping("/pickUpOrder/{orderId}/{supplierId}")
 	public String pickUpOrder(@PathVariable String orderId,@PathVariable String supplierId) {
@@ -121,17 +121,28 @@ public class supplyController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: find order by supplier id
 	 */
 	@GetMapping("/findMyOrders/{supplierId}")
 	public List<Orders> findMyOrders(@PathVariable String supplierId) {
 		return serviceObj.findMyOrders(Integer.parseInt(supplierId));
 	}
+	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: find supplier by supplier name
+	 */
 	@GetMapping("/viewSupplierByName/{supplierName}")
 	public Supplier viewSupplierByName(@PathVariable String supplierName) {
 		return supplyRepository.findBySupplierName(supplierName);
 	}
 	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: find supplier by supplier id
+	 */
 	@GetMapping("/viewSupplierById/{supplierId}")
 	public Optional<Supplier> viewSupplierById(@PathVariable String supplierId) {
 		return supplyRepository.findById(Integer.parseInt(supplierId));

@@ -24,7 +24,13 @@ public class PaymentController {
 	private RazorpayClient client;
 	private static final String SECRET_ID = "rzp_test_qhkBI8zT2ejI3F";
 	private static final String SECRET_KEY = "r5JaLYFeYuXBFrqLGbwK6wvM";
-
+	
+	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:create order for razorpay account
+	 */
 	@PostMapping("/createOrder")
 	public OrderResponse createOrder(@RequestBody OrderRequest orderRequest) throws RazorpayException {
 		OrderResponse response = new OrderResponse();
@@ -42,7 +48,12 @@ public class PaymentController {
 				response.setPgName("razor1");
 			return response;
 	}
-
+	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: add amount related info to order
+	 */
 	private Order createRazorPayOrder(BigInteger amount) throws RazorpayException {
 
 		JSONObject options = new JSONObject();

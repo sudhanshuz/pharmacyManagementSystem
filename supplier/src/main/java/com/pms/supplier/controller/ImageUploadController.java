@@ -30,6 +30,12 @@ public class ImageUploadController {
 	@Autowired
 	ImageRepo imageRepository;
 
+	
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: upload the image into the database
+	 */
 	@PostMapping("/upload")
 	public BodyBuilder uplaodImage(@RequestParam("imageFile") MultipartFile file) throws IOException {
 
@@ -41,6 +47,11 @@ public class ImageUploadController {
 		return ResponseEntity.status(HttpStatus.OK);
 	}
 
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: get the image stored
+	 */
 	@GetMapping(path = { "/get/{imageName}" })
 	public ImageModel getImage(@PathVariable("imageName") String imageName) throws IOException {
 
@@ -50,7 +61,11 @@ public class ImageUploadController {
 		return img;
 	}
 
-	// compress the image bytes before storing it in the database
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description: compress the image bytes before storing it in the database
+	 */
 	public static byte[] compressBytes(byte[] data) {
 		Deflater deflater = new Deflater();
 		deflater.setInput(data);
@@ -71,7 +86,11 @@ public class ImageUploadController {
 		return outputStream.toByteArray();
 	}
 
-	// uncompress the image bytes before returning it to the angular application
+	/* Author: Sudhanshu
+	  Modified By:Sudhanshu
+	  Modified Time:
+	  description:uncompress the image bytes before returning it to the angular application
+	 */
 	public static byte[] decompressBytes(byte[] data) {
 		Inflater inflater = new Inflater();
 		inflater.setInput(data);

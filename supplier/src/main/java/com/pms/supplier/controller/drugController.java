@@ -32,7 +32,7 @@ public class drugController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: get all the drugs from the repository
 	 */
 	@GetMapping("/getAll")
 	public List<Drugs> viewDrugs(){
@@ -41,7 +41,7 @@ public class drugController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description:add the drugs to the repository
 	 */
 	@PostMapping("/add")
 	public Drugs addDrugs(@RequestBody @Valid Drugs drug) {
@@ -52,7 +52,7 @@ public class drugController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: view drugs by its name
 	 */
 	@GetMapping("/viewDrugByName/{name}")
 	public Drugs viewDrugByName(@PathVariable String name) throws ResourceNotFoundException {
@@ -61,7 +61,7 @@ public class drugController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: get the drug price
 	 */
 	@GetMapping("/getDrugPrice/{drugName}")
 	public double getDrugPrice(@PathVariable String drugName) throws ResourceNotFoundException {
@@ -70,7 +70,7 @@ public class drugController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: delete drug by its name
 	 */
 	@DeleteMapping("/deleteDrugByName/{drugName}")
 	public Drugs deleteDrugs(@PathVariable String drugName) throws ResourceNotFoundException {
@@ -79,7 +79,7 @@ public class drugController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: edit the requested drug
 	 */
 	@PutMapping("/edit")
 	public Drugs editDrugs(@RequestBody Drugs drug) {

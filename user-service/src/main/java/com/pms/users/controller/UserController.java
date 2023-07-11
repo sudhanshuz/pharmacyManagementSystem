@@ -69,7 +69,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description:save the registered user
 	 */
 	@PostMapping("/add")
 	public User saveUser( @RequestBody @Valid User user) throws ResourceNotFoundException {
@@ -81,7 +81,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description:get all the users from database
 	 */
 	@GetMapping("/getAll")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -93,7 +93,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: get the user by user Id
 	 */
 	@GetMapping("/getUserById/{userId}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
@@ -105,7 +105,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: edit the user
 	 */
 	@PutMapping("/edit")
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -117,7 +117,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: delete the user by his user id
 	 */
 	@DeleteMapping("deleteById/{userId}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
@@ -129,7 +129,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: search the user based on his user name
 	 */
 	@GetMapping("/getByName/{name}")
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
@@ -141,7 +141,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: calling add suppliers method
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addSuppliers")
@@ -153,7 +153,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: add all the picked up orders in users order db
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/addPickedUpOrders")
@@ -166,7 +166,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: view picked up orders
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/viewPickedUpOrders")
@@ -179,7 +179,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: view all the suppliers
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/viewSuppliers")
@@ -193,7 +193,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: add drugs to the inventory
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/addDrugs")
@@ -208,7 +208,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: delete the drug by its name
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteDrug/{drugName}")
@@ -222,7 +222,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: view all the drugs
 	 */
 	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	@GetMapping("/viewDrugs")
@@ -236,7 +236,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: edit the drugs
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editDrugs")
@@ -248,7 +248,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: delete the supppliers by id
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/deleteSupplier/{supplierId}")
@@ -261,7 +261,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: edit the supplier info
 	 */
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/editSuppliers")
@@ -274,7 +274,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description:verify orders
 	 */
 	//@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PutMapping("/verifyOrderByOrderId/{orderId}")
@@ -287,7 +287,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: place order from here
 	 */
 	@PreAuthorize("hasRole('ROLE_DOCTOR')")
 	@PostMapping("/placeOrder")
@@ -300,7 +300,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: view newly placed orders
 	 */
 	@GetMapping("/viewNewOrders")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -312,7 +312,7 @@ public class UserController {
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: authenticate the user and generate jwt token from it.
 	 */
 	 @PostMapping("/authenticate")
 	    public ResponseEntity<?> authenticateAndGetToken(@RequestBody AuthRequest authRequest) {
@@ -331,7 +331,7 @@ public class UserController {
 		/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: search drugs by its name
 	 */
 	 @GetMapping("/searchDrugByName/{drugName}")
 	 public Drugs searchDrugsByName(@PathVariable String drugName) {
@@ -339,13 +339,12 @@ public class UserController {
 	 }
 	 
 	 //pending
+	 
 		/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
-	  description:
+	  description: get current user
 	 */
-	 
-	 
 	 @PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	 @GetMapping("/currentUser")
 	 public Optional<User> getCurrentUser(Principal principal,@RequestHeader("Authorization") String token) {
