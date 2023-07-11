@@ -141,20 +141,25 @@ public class SupplierControllerTest {
     }
 
     @Test
-    public void testPickUpOrder() {
-        // Arrange
+    void testPickUpOrder() {
+        // Mock input values
         String orderId = "123";
-        String supplierId = "1";
-        String expectedResponse = "Order picked up successfully";
+        String supplierId = "456";
+        long parsedOrderId = 123L;
+        int parsedSupplierId = 456;
 
-        when(serviceObj.pickUpOrder(Long.parseLong(orderId), Integer.parseInt(supplierId))).thenReturn(expectedResponse);
+        // Mock service method behavior
+        Orders expectedOrders = new Orders(); // Create an instance of the expected Orders object
+        when(serviceObj.pickUpOrder(parsedOrderId, parsedSupplierId)).thenReturn(expectedOrders);
 
-        // Act
-        String actualResponse = supplierController.pickUpOrder(orderId, supplierId);
+        // Call the method under test
+        Orders result = supplierController.pickUpOrder(orderId, supplierId);
 
-        // Assert
-        verify(serviceObj, times(1)).pickUpOrder(Long.parseLong(orderId), Integer.parseInt(supplierId));
-        assertEquals(expectedResponse, actualResponse);
+        // Verify the service method was called with the correct arguments
+        verify(serviceObj).pickUpOrder(parsedOrderId, parsedSupplierId);
+
+        // Assert the expected result
+        assertEquals(expectedOrders, result);
     }
 
     @Test

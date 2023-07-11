@@ -115,7 +115,7 @@ public class supplyController {
 	  description: pick order from available
 	 */
 	@PutMapping("/pickUpOrder/{orderId}/{supplierId}")
-	public String pickUpOrder(@PathVariable String orderId,@PathVariable String supplierId) {
+	public Orders pickUpOrder(@PathVariable String orderId,@PathVariable String supplierId) {
 		return serviceObj.pickUpOrder(Long.parseLong(orderId),Integer.parseInt(supplierId));
 	}
 	/* Author: Sudhanshu

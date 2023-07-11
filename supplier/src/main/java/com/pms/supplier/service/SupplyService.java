@@ -105,8 +105,9 @@ public class SupplyService {
 		return supplierRepository.save(supplier);
 	}
 	
-	public String pickUpOrder(Long orderId,int supplierId) {
+	public Orders pickUpOrder(Long orderId,int supplierId) {
 		Orders[] orders= restTemplate.getForObject("http://ORDERS-SERVICE/orders/viewVerifiedOrders",Orders[].class);
+		Orders ans=null;
 		for(Orders order:orders) {
 			if(order.getOrderId()==orderId) {
 				order.setPickedUp(true);
@@ -118,11 +119,12 @@ public class SupplyService {
 		        headers.setContentType(MediaType.APPLICATION_JSON);
 
 		        HttpEntity<Orders> requestEntity = new HttpEntity<>(order, headers);
-				restTemplate.postForObject("http://ORDERS-SERVICE/orders/addPickedUpOrders", requestEntity, Orders.class);
+				ans=restTemplate.postForObject("http://ORDERS-SERVICE/orders/addPickedUpOrders", requestEntity, Orders.class);
+				
 				break;
 			}
 		}
-		return "order has been picked up successfully";
+		return ans;
 	}
 
 	public Orders[] serviceObj() {
