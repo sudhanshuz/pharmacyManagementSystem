@@ -7,6 +7,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +16,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.pms.supplier.exception.ResourceNotFoundException;
 import com.pms.supplier.model.Drugs;
 import com.pms.supplier.service.SupplyService;
@@ -29,6 +35,9 @@ public class drugController {
 	Logger logger=LoggerFactory.getLogger(drugController.class);
 	@Autowired
 	private SupplyService serviceObj;
+	
+	@Autowired
+	private ObjectMapper mapper;
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:
@@ -49,6 +58,19 @@ public class drugController {
 		logger.error("what's wrong");
 		return serviceObj.insertDrug(drug);
 	}
+	//*************************************
+	@PostMapping("/addWithImg")
+	public ResponseEntity<?> addDrugsWithImg(@RequestParam("file") MultipartFile file,
+								@RequestParam("drugData") String drug) throws JsonMappingException, JsonProcessingException {
+		logger.info("check");
+		logger.error("what's wrong");
+		
+		Drugs drugs=mapper.readValue(drug,Drugs.class);
+		serviceObj.insertDrug(drugs);
+		return ResponseEntity.ok(drugs);
+	}
+	
+	//******************************************
 	/* Author: Sudhanshu
 	  Modified By:Sudhanshu
 	  Modified Time:

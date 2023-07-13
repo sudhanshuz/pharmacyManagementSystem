@@ -37,8 +37,8 @@ public class DrugsControllerTest {
     public void testViewDrugs() {
 
         List<Drugs> expectedDrugs = new ArrayList();
-        expectedDrugs.add(new Drugs("Drug A",100,new Date(),"b101"));
-        expectedDrugs.add(new Drugs("Drug B",100,new Date(),"b101"));
+        expectedDrugs.add(new Drugs("Drug A",100,new Date(),"batchId",""));
+        expectedDrugs.add(new Drugs("Drug B",100,new Date(),"lab101",""));
         when(serviceObj.getDrugs()).thenReturn(expectedDrugs);
         List<Drugs> actualDrugs = controller.viewDrugs();
 

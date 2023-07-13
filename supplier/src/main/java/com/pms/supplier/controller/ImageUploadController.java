@@ -42,7 +42,7 @@ public class ImageUploadController {
 		System.out.println("Original Image Byte Size - " + file.getBytes().length);
 		ImageModel img = new ImageModel(file.getOriginalFilename(), file.getContentType(),
 				compressBytes(file.getBytes()));
-		img.setId((long) 1);
+		img.setId(file.getOriginalFilename());
 		imageRepository.save(img);
 		return ResponseEntity.status(HttpStatus.OK);
 	}

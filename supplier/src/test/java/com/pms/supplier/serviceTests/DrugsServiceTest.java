@@ -47,7 +47,7 @@ public class DrugsServiceTest {
 	        // Arrange
 	        String drugName = "Drug A";
 	        double expectedPrice = 10.0;
-	        Drugs drug = new Drugs("Drug A",10,new Date(),"b101");
+	        Drugs drug = new Drugs("Drug A",10,new Date(),"lab101","");
 	        when(drugRepository.findById(drugName)).thenReturn(Optional.of(drug));
 
 	        // Act
@@ -142,7 +142,7 @@ public class DrugsServiceTest {
 	        String drugName = "Drug A";
 	        int qty = 10;
 	        Supplier supplier = new Supplier();
-	        Drugs drug = new Drugs(drugName,10,new Date(),"spw");
+	        Drugs drug = new Drugs(drugName,10,new Date(),"lab101","");
 	        when(supplierRepository.findById(supplierId)).thenReturn(Optional.of(supplier));
 	        when(drugRepository.findById(drugName)).thenReturn(Optional.of(drug));
 
@@ -188,7 +188,7 @@ public class DrugsServiceTest {
 	    public void testViewDrugByName() throws ResourceNotFoundException {
 	        // Arrange
 	        String drugName = "Drug A";
-	        Drugs expectedDrug = new Drugs(drugName,10,new Date(),"spw");
+	        Drugs expectedDrug = new Drugs(drugName,10,new Date(),"lab101","");
 	        when(drugRepository.findById(drugName)).thenReturn(Optional.of(expectedDrug));
 
 	        // Act
