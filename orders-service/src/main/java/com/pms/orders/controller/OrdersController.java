@@ -2,7 +2,6 @@ package com.pms.orders.controller;
 
 import java.util.List;
 
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pms.orders.exception.ResourceNotFoundException;
@@ -195,4 +193,16 @@ public class OrdersController {
 		System.out.println(pickUpDate);
 		return ordersService.getOrdersByPickUpDate(pickUpDate);
 	}
+	
+	@Autowired
+    public OrdersController(OrdersService emailService) {
+        this.ordersService = emailService;
+    }
+
+	public boolean sendEmail(String to, String from,String subject,String text) {
+		boolean flag=false;
+		
+		return false;
+	}
+
 }

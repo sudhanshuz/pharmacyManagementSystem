@@ -18,5 +18,7 @@ public class OrdersServiceApplication {
 	public RestTemplate restTemplate() {
 		return new RestTemplate();
 	}
+	
+	
 
 }

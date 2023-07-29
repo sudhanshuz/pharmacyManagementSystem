@@ -132,7 +132,7 @@ public class UserController {
 	  description: search the user based on his user name
 	 */
 	@GetMapping("/getByName/{name}")
-	@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
+	//@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_DOCTOR')")
 	public Optional<User> findByUserName(@PathVariable String name) {
 		return userService.getByName(name);	
 	}
